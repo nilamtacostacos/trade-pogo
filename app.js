@@ -3,6 +3,7 @@
 // ============================================================
 const translations = {
   fr: {
+    intro_label: "Message",
     looking_for: "Je recherche",
     to_trade: "J'offre",
     filters_btn: "Filtres",
@@ -16,6 +17,7 @@ const translations = {
     footer_hint: "Venez échanger !",
   },
   en: {
+    intro_label: "Message",
     looking_for: "Looking for",
     to_trade: "To trade",
     filters_btn: "Filters",
@@ -29,6 +31,7 @@ const translations = {
     footer_hint: "Let's trade !",
   },
   pt: {
+    intro_label: "Mensagem",
     looking_for: "Estou à procura de",
     to_trade: "Ofereço",
     filters_btn: "Filtros",
@@ -42,6 +45,7 @@ const translations = {
     footer_hint: "Venham trocar!",
   },
   es: {
+    intro_label: "Mensaje",
     looking_for: "Busco",
     to_trade: "Intercambio",
     filters_btn: "Filtros",
