@@ -11,6 +11,9 @@
   --teal: #1E8E6B;
   --violet: #6C4FD1;
   --blue: #1976D2;
+  --green: #6ED64F;
+  --red: #CC2F2F;
+  --marron: #94531F;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --sans: -apple-system, "Segoe UI", system-ui, Arial, sans-serif;
 }
@@ -191,8 +194,11 @@ body {
   border-radius: 5px;
 }
 .tag.shiny { background: var(--gold); color: var(--ink); }
-.tag.lucky { background: var(--violet); }
-.tag.pvp { background: var(--blue); }
+.tag.location { background: var(--blue); }
+.tag.special { background: var(--green); }
+.tag.event { background: var(--violet); }
+.tag.pvp { background: var(--red); }
+.tag.region { background: var(--marron); }
 
 .footer {
   padding: 14px 16px 20px;
