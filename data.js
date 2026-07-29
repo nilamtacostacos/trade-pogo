@@ -16,7 +16,7 @@ const dateMaj = "29/07/2026";
 //   id    → le numéro du Pokédex national (pour la photo automatique)
 //           laisse "" (vide) si tu ne veux pas de photo
 //   tags  → liste parmi :
-//        -shiny
+//        - shiny
 //        - location
 //        - special
 //        - event
@@ -29,16 +29,16 @@ const dateMaj = "29/07/2026";
 // -----------------------------------------------------------
 
 const jeCherche = [
-  { name: "Pokémon 1", id: "", tags: [] },    //, tags: ["shiny"]}//
-  { name: "Pokémon 2", id: "", tags: [] },    //, tags: ["lucky"] //
-  { name: "Pokémon 3", id: "", tags: [] },    //, tags: [] 
-  { name: "Pokémon 4", id: "", tags: [] },    //tags: [] 
+  { name: "Pokémon 1", id: "", tags: ["shiny"] },    //, tags: ["shiny"]}//
+  { name: "Pokémon 2", id: "", tags: ["shiny"] },    //, tags: ["lucky"] //
+  { name: "Pokémon 3", id: "", tags: ["location"] },    //, tags: [] 
+  { name: "Pokémon 4", id: "", tags: ["pvp"] },    //tags: [] 
   { name: "Pokémon 5", id: "", tags: [] },    //, tags: ["pvp"] 
 ];
 
 const jEchange = [
-  { name: "Pokémon A", id: "", tags: ["shiny"] },
-  { name: "Pokémon B", id: "", tags: [] },
-  { name: "Pokémon C", id: "", tags: [] },
+  { name: "Pokémon A", id: "", tags: ["shiny", "location"] },
+  { name: "Pokémon B", id: "", tags: ["region"] },
+  { name: "Pokémon C", id: "", tags: ["special","event"] },
   { name: "Pokémon D", id: "", tags: [] },
 ];
