@@ -98,3 +98,19 @@ function setupFilters(scope, listId) {
 
 setupFilters('cherche', 'listCherche');
 setupFilters('echange', 'listEchange');
+
+
+const pager = document.getElementById('pager');
+const dots = document.querySelectorAll('.dot-ind');
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    const index = Number(dot.dataset.page);
+    pager.scrollTo({ left: pager.clientWidth * index, behavior: 'smooth' });
+  });
+});
+
+pager.addEventListener('scroll', () => {
+  const index = Math.round(pager.scrollLeft / pager.clientWidth);
+  dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+});
