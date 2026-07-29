@@ -62,33 +62,39 @@ document.getElementById("updatedLine").textContent = "SYNC — " + dateMaj;
 renderList("listCherche", jeCherche);
 renderList("listEchange", jEchange);
 
-const activeFilters = new Set();
+function setupFilters(scope, listId) {
+  const bar = document.querySelector(`.filters[data-scope="${scope}"]`);
+  const list = document.getElementById(listId);
+  const active = new Set();
 
-document.querySelectorAll('.filter-chip:not(.reset-chip)').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const f = btn.dataset.filter;
-    if (activeFilters.has(f)) {
-      activeFilters.delete(f);
-      btn.classList.remove('active');
+  bar.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-chip');
+    if (!btn) return;
+
+    if (btn.dataset.reset) {
+      active.clear();
+      bar.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
     } else {
-      activeFilters.add(f);
-      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      if (active.has(f)) {
+        active.delete(f);
+        btn.classList.remove('active');
+      } else {
+        active.add(f);
+        btn.classList.add('active');
+      }
     }
-    applyFilters();
+    apply();
   });
-});
 
-document.getElementById('resetFilters').addEventListener('click', () => {
-  activeFilters.clear();
-  document.querySelectorAll('.filter-chip').forEach(btn => btn.classList.remove('active'));
-  applyFilters();
-});
-
-function applyFilters() {
-  document.querySelectorAll('.row').forEach(row => {
-    const tags = (row.dataset.tags || '').split(',').filter(Boolean);
-    // intersection stricte : la ligne doit contenir TOUS les filtres actifs
-    const show = [...activeFilters].every(f => tags.includes(f));
-    row.classList.toggle('hidden', activeFilters.size > 0 && !show);
-  });
+  function apply() {
+    list.querySelectorAll('.row').forEach(row => {
+      const tags = (row.dataset.tags || '').split(',').filter(Boolean);
+      const show = [...active].every(f => tags.includes(f));
+      row.classList.toggle('hidden', active.size > 0 && !show);
+    });
+  }
 }
+
+setupFilters('cherche', 'listCherche');
+setupFilters('echange', 'listEchange');
