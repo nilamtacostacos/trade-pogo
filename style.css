@@ -1,5 +1,5 @@
 :root {
-  --red: #EE1515;
+  /-red: #EE1515;
   --red-deep: #A80F0F;
   --ink: #14141c;
   --ink-soft: #23232f;
@@ -12,7 +12,7 @@
   --violet: #6C4FD1;
   --blue: #1976D2;
   --green: #6ED64F;
-  --red: #CC2F2F;
+  --red-pvp: #CC2F2F;
   --marron: #94531F;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --sans: -apple-system, "Segoe UI", system-ui, Arial, sans-serif;
@@ -197,7 +197,7 @@ body {
 .tag.location { background: var(--blue); }
 .tag.special { background: var(--green); }
 .tag.event { background: var(--violet); }
-.tag.pvp { background: var(--red); }
+.tag.pvp { background: var(--red-pvp); }
 .tag.region { background: var(--marron); }
 
 .footer {
@@ -262,7 +262,7 @@ body {
 .filter-chip[data-filter="special"]  { --chip-color: var(--green); --chip-text: #ffffff; }
 .filter-chip[data-filter="event"]    { --chip-color: var(--violet); --chip-text: #ffffff; }
 .filter-chip[data-filter="region"]   { --chip-color: var(--marron); --chip-text: #ffffff; }
-.filter-chip[data-filter="pvp"]      { --chip-color: var(--red); --chip-text: #ffffff; }
+.filter-chip[data-filter="pvp"]      { --chip-color: var(--red-pvp); --chip-text: #ffffff; }
 
 .filter-chip:not(.reset-chip):hover,
 .filter-chip:not(.reset-chip).active {
@@ -292,6 +292,7 @@ body {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   margin: 0 -16px; /* compense le padding du .content pour aller bord à bord */
+  align-items: flex-start;
 }
 .pager::-webkit-scrollbar { display: none; }
 .pager { scrollbar-width: none; }
