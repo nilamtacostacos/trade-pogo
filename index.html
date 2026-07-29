@@ -26,33 +26,35 @@
 
  <div class="content">
     <div class="meta-line" id="updatedLine"></div>
-   <!-- 
-      <div class="filters" id="filterBar">
-        <button class="filter-chip" data-filter="shiny">Shiny</button>
-        <button class="filter-chip" data-filter="location">Location Background</button>
-        <button class="filter-chip" data-filter="special">Special Background</button>
-        <button class="filter-chip" data-filter="event">Event / costumed</button>
-        <button class="filter-chip" data-filter="region">Region exclusive</button>
-        <button class="filter-chip" data-filter="pvp">PVP</button>
-        <button class="filter-chip reset-chip" id="resetFilters">✕Reset filter</button>
-      </div>
-    -->
+
+<div class="lang-switch" id="langSwitch">
+  <button class="lang-btn active" data-lang="en">🇬🇧</button>
+  <button class="lang-btn" data-lang="pt">🇵🇹</button>
+  <button class="lang-btn" data-lang="fr">🇫🇷</button>
+  <button class="lang-btn" data-lang="es">🇪🇸</button>
+</div>
+
+<p class="intro" id="introText"></p>
+   
 <div class="pager" id="pager">
 
   <div class="page">
     <div class="panel cherche">
   <div class="panel-head">
-      <span class="marker">›</span> Looking for
-      <button class="filter-toggle" data-toggle="cherche" aria-label="Afficher les filtres">▾ Filters</button>
-    </div>
+    <span class="marker">›</span> <span data-i18n="looking_for">Looking for</span>
+    <button class="filter-toggle" data-toggle="cherche" aria-label="Afficher les filtres">
+      <span class="arrow">▾</span> <span data-i18n="filters_btn">Filtres</span>
+    </button>
+  </div>
+      
   <div class="filters" data-scope="cherche" id="filters-cherche">
-        <button class="filter-chip" data-filter="shiny">Shiny</button>
-        <button class="filter-chip" data-filter="location">Location Background</button>
-        <button class="filter-chip" data-filter="special">Special Background</button>
-        <button class="filter-chip" data-filter="event">Event / costumed</button>
-        <button class="filter-chip" data-filter="region">Region exclusive</button>
-        <button class="filter-chip" data-filter="pvp">PVP</button>
-        <button class="filter-chip reset-chip" data-reset="cherche">✕ Reset filter</button>
+      <button class="filter-chip" data-filter="shiny"><span data-i18n="tag_shiny">Shiny</span></button>
+      <button class="filter-chip" data-filter="location"><span data-i18n="tag_location">Location Background</span></button>
+      <button class="filter-chip" data-filter="special"><span data-i18n="tag_special">Special Background</span></button>
+      <button class="filter-chip" data-filter="event"><span data-i18n="tag_event">Event / costumed</span></button>
+      <button class="filter-chip" data-filter="region"><span data-i18n="tag_region">Region exclusive</span></button>
+      <button class="filter-chip" data-filter="pvp"><span data-i18n="tag_pvp">PVP</span></button>
+      <button class="filter-chip reset-chip" data-reset="cherche">✕ <span data-i18n="reset_filter">Reset filter</span></button>
       </div>
       <div id="listCherche"></div>
     </div>
@@ -61,18 +63,22 @@
   <div class="page">
     <div class="panel echange">
       <div class="panel-head">
-        <span class="marker">›</span> To trade
-        <button class="filter-toggle" data-toggle="echange" aria-label="Afficher les filtres">▾ Filtres</button>
+         <span class="marker">›</span> <span data-i18n="to_trade">To trade</span>
+         <button class="filter-toggle" data-toggle="echange" aria-label="Afficher les filtres">
+         <span class="arrow">▾</span> <span data-i18n="filters_btn">Filtres</span>
+          </button>
       </div>
+      
     <div class="filters" data-scope="echange" id="filters-echange">
-        <button class="filter-chip" data-filter="shiny">Shiny</button>
-        <button class="filter-chip" data-filter="location">Location Background</button>
-        <button class="filter-chip" data-filter="special">Special Background</button>
-        <button class="filter-chip" data-filter="event">Event / costumed</button>
-        <button class="filter-chip" data-filter="region">Region exclusive</button>
-        <button class="filter-chip" data-filter="pvp">PVP</button>
-        <button class="filter-chip reset-chip" data-reset="echange">✕ Reset filter</button>
-      </div>
+      <button class="filter-chip" data-filter="shiny"><span data-i18n="tag_shiny">Shiny</span></button>
+      <button class="filter-chip" data-filter="location"><span data-i18n="tag_location">Location Background</span></button>
+      <button class="filter-chip" data-filter="special"><span data-i18n="tag_special">Special Background</span></button>
+      <button class="filter-chip" data-filter="event"><span data-i18n="tag_event">Event / costumed</span></button>
+      <button class="filter-chip" data-filter="region"><span data-i18n="tag_region">Region exclusive</span></button>
+      <button class="filter-chip" data-filter="pvp"><span data-i18n="tag_pvp">PVP</span></button>
+      <button class="filter-chip reset-chip" data-reset="cherche">✕ <span data-i18n="reset_filter">Reset filter</span></button>
+    </div>
+      
       <div id="listEchange"></div>
     </div>
   </div>
@@ -85,7 +91,7 @@
 
   
   <div class="footer">
-    <span class="hint">Let's trade !</span>
+    <span class="hint" data-i18n="footer_hint">Let's trade !</span>
     <!--
     BOUTON IMPRIMER
    <button id="printBtn" onclick="window.print()">Imprimer</button>
