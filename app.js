@@ -16,7 +16,7 @@ function renderList(target, items) {
       : `<div class="dot"></div>`;
     const tags = item.tags.map(t => `<span class="tag ${t}">${tagLabel[t]}</span>`).join("");
     return `
-      <div class="row">
+      <div class="row" data-tags="${item.tags.join(',')}">
         ${image}
         <div class="name">${item.name}</div>
         ${tags}
@@ -61,3 +61,27 @@ document.getElementById("trainerCode").textContent = trainerCode;
 document.getElementById("updatedLine").textContent = "SYNC — " + dateMaj;
 renderList("listCherche", jeCherche);
 renderList("listEchange", jEchange);
+
+const activeFilters = new Set();
+
+document.querySelectorAll('.filter-chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const f = btn.dataset.filter;
+    if (activeFilters.has(f)) {
+      activeFilters.delete(f);
+      btn.classList.remove('active');
+    } else {
+      activeFilters.add(f);
+      btn.classList.add('active');
+    }
+    applyFilters();
+  });
+});
+
+function applyFilters() {
+  document.querySelectorAll('.row').forEach(row => {
+    const tags = (row.dataset.tags || '').split(',').filter(Boolean);
+    const show = activeFilters.size === 0 || tags.some(t => activeFilters.has(t));
+    row.classList.toggle('hidden', !show);
+  });
+}
