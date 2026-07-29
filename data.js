@@ -15,7 +15,15 @@ const dateMaj = "29/07/2026";
 //   name  → le nom affiché
 //   id    → le numéro du Pokédex national (pour la photo automatique)
 //           laisse "" (vide) si tu ne veux pas de photo
-//   tags  → liste parmi "shiny", "lucky", "pvp" (ou [] si aucun)
+//   tags  → liste parmi :
+//        -shiny
+//        - location
+//        - special
+//        - event
+//        - region
+//        - pvp
+//
+//"shiny", "lucky", "pvp" (ou [] si aucun)
 //
 // Exemple : { name: "Pikachu", id: 25, tags: ["shiny"] }
 // -----------------------------------------------------------
