@@ -257,9 +257,18 @@ body {
   padding: 5px 12px;
   cursor: pointer;
 }
-.filter-chip.active {
-  background: var(--ink);
-  color: #fff;
+.filter-chip[data-filter="shiny"]    { --chip-color: #FFCB05; --chip-text: #14141c; }
+.filter-chip[data-filter="location"] { --chip-color: #F4791F; --chip-text: #ffffff; }
+.filter-chip[data-filter="special"]  { --chip-color: #6C4FD1; --chip-text: #ffffff; }
+.filter-chip[data-filter="event"]    { --chip-color: #D6449D; --chip-text: #ffffff; }
+.filter-chip[data-filter="region"]   { --chip-color: #1976D2; --chip-text: #ffffff; }
+.filter-chip[data-filter="pvp"]      { --chip-color: #00897B; --chip-text: #ffffff; }
+
+.filter-chip:not(.reset-chip):hover,
+.filter-chip:not(.reset-chip).active {
+  background: var(--chip-color, var(--ink));
+  color: var(--chip-text, #fff);
+  border-color: var(--chip-color, var(--ink));
 }
 .reset-chip {
   background: var(--panel);
