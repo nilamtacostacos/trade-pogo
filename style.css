@@ -228,3 +228,31 @@ body {
   .copy-btn { display: none; }
   .lens::before { animation: none; }
 }
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.filter-chip {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  background: var(--panel);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+.filter-chip.active {
+  background: var(--ink);
+  color: #fff;
+}
+.row.hidden { display: none; }
+
+@media print {
+  .filters { display: none; }
+}
