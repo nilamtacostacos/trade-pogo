@@ -41,15 +41,18 @@
 
   <div class="page">
     <div class="panel cherche">
-      <div class="panel-head"><span class="marker">›</span> Looking for</div>
-      <div class="filters" data-scope="cherche">
+  <div class="panel-head">
+      <span class="marker">›</span> Looking for
+      <button class="filter-toggle" data-toggle="cherche" aria-label="Afficher les filtres">▾ Filters</button>
+    </div>
+  <div class="filters" data-scope="cherche" id="filters-cherche">
         <button class="filter-chip" data-filter="shiny">Shiny</button>
         <button class="filter-chip" data-filter="location">Location Background</button>
         <button class="filter-chip" data-filter="special">Special Background</button>
         <button class="filter-chip" data-filter="event">Event / costumed</button>
         <button class="filter-chip" data-filter="region">Region exclusive</button>
         <button class="filter-chip" data-filter="pvp">PVP</button>
-        <button class="filter-chip reset-chip" data-reset="cherche">✕Reset filter</button>
+        <button class="filter-chip reset-chip" data-reset="cherche">✕ Reset filter</button>
       </div>
       <div id="listCherche"></div>
     </div>
@@ -57,15 +60,18 @@
 
   <div class="page">
     <div class="panel echange">
-      <div class="panel-head"><span class="marker">›</span> To trade</div>
-      <div class="filters" data-scope="echange">
+      <div class="panel-head">
+        <span class="marker">›</span> To trade
+        <button class="filter-toggle" data-toggle="echange" aria-label="Afficher les filtres">▾ Filtres</button>
+      </div>
+    <div class="filters" data-scope="echange" id="filters-echange">
         <button class="filter-chip" data-filter="shiny">Shiny</button>
         <button class="filter-chip" data-filter="location">Location Background</button>
         <button class="filter-chip" data-filter="special">Special Background</button>
         <button class="filter-chip" data-filter="event">Event / costumed</button>
         <button class="filter-chip" data-filter="region">Region exclusive</button>
         <button class="filter-chip" data-filter="pvp">PVP</button>
-        <button class="filter-chip reset-chip" data-reset="echange">✕Reset filter</button>
+        <button class="filter-chip reset-chip" data-reset="echange">✕ Reset filter</button>
       </div>
       <div id="listEchange"></div>
     </div>
