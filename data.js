@@ -4,8 +4,8 @@
 // ============================================================
 
 // Ton nom et ton code ami (visible en haut de la page)
-const trainerName = "PRÉNOM";
-const trainerCode = "1234 5678 9012";
+const trainerName = "NilamTacos";
+const trainerCode = "1898 4790 6821";
 
 // Date de dernière mise à jour (juste affichée, change-la à chaque event)
 const dateMaj = "29/07/2026";
