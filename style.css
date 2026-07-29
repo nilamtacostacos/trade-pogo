@@ -203,7 +203,8 @@ body {
 }
 .footer .hint {
   font-size: 0.85rem;
-  color: var(--muted);
+  color: black;
+  align-items: center;
 }
 #printBtn {
   font-family: var(--sans);
