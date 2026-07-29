@@ -259,7 +259,7 @@ body {
 }
 .filter-chip[data-filter="shiny"]    { --chip-color: var(--gold); --chip-text: #14141c; }
 .filter-chip[data-filter="location"] { --chip-color: var(--blue); --chip-text: #ffffff; }
-.filter-chip[data-filter="special"]  { --chip-color: var(--green); --chip-text: #ffffff; }
+.filter-chip[data-filter="special"]  { --chip-color: var(--green); --chip-text: #14141c; }
 .filter-chip[data-filter="event"]    { --chip-color: var(--violet); --chip-text: #ffffff; }
 .filter-chip[data-filter="region"]   { --chip-color: var(--marron); --chip-text: #ffffff; }
 .filter-chip[data-filter="pvp"]      { --chip-color: var(--red-pvp); --chip-text: #ffffff; }
