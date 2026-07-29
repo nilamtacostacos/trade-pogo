@@ -64,7 +64,7 @@ renderList("listEchange", jEchange);
 
 const activeFilters = new Set();
 
-document.querySelectorAll('.filter-chip').forEach(btn => {
+document.querySelectorAll('.filter-chip:not(.reset-chip)').forEach(btn => {
   btn.addEventListener('click', () => {
     const f = btn.dataset.filter;
     if (activeFilters.has(f)) {
@@ -78,10 +78,17 @@ document.querySelectorAll('.filter-chip').forEach(btn => {
   });
 });
 
+document.getElementById('resetFilters').addEventListener('click', () => {
+  activeFilters.clear();
+  document.querySelectorAll('.filter-chip').forEach(btn => btn.classList.remove('active'));
+  applyFilters();
+});
+
 function applyFilters() {
   document.querySelectorAll('.row').forEach(row => {
     const tags = (row.dataset.tags || '').split(',').filter(Boolean);
-    const show = activeFilters.size === 0 || tags.some(t => activeFilters.has(t));
-    row.classList.toggle('hidden', !show);
+    // intersection stricte : la ligne doit contenir TOUS les filtres actifs
+    const show = [...activeFilters].every(f => tags.includes(f));
+    row.classList.toggle('hidden', activeFilters.size > 0 && !show);
   });
 }
