@@ -3,144 +3,254 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ma liste d'échanges Pokémon GO</title>
+<title>Scan-Dex — Échanges Pokémon GO</title>
 <style>
   :root {
-    --rouge: #E3350D;
-    --vert: #2A9D5C;
-    --jaune: #FFCB05;
-    --dark: #1a1a2e;
+    --red: #EE1515;
+    --red-deep: #A80F0F;
+    --ink: #14141c;
+    --ink-soft: #23232f;
+    --bg: #e9e9ee;
+    --panel: #ffffff;
+    --line: #d7d7de;
+    --muted: #6b6b76;
+    --gold: #FFCB05;
+    --teal: #1E8E6B;
+    --violet: #6C4FD1;
+    --blue: #1976D2;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --sans: -apple-system, "Segoe UI", system-ui, Arial, sans-serif;
   }
   * { box-sizing: border-box; }
   body {
-    font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
-    background: #f4f4f8;
-    color: var(--dark);
+    background: var(--bg);
+    font-family: var(--sans);
+    color: var(--ink);
+    display: flex;
+    justify-content: center;
+    padding: 22px 12px 60px;
   }
-  .wrap {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 16px;
+  .device {
+    width: 100%;
+    max-width: 460px;
+    background: var(--panel);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 18px 40px -14px rgba(20,20,28,0.35);
+    border: 2px solid var(--ink);
   }
-  .header {
-    background: var(--jaune);
-    border: 4px solid var(--dark);
-    border-radius: 14px;
-    padding: 16px;
-    text-align: center;
-    margin-bottom: 16px;
-  }
-  .header h1 { margin: 0 0 6px 0; font-size: 1.6rem; }
-  .header .code {
-    font-family: 'Courier New', monospace;
-    font-size: 1.1rem;
-    font-weight: bold;
-    background: #fff;
-    border: 2px solid var(--dark);
-    border-radius: 8px;
-    padding: 4px 10px;
-    display: inline-block;
-    letter-spacing: 1px;
-  }
-  .updated {
-    text-align: center;
-    font-size: 0.8rem;
-    color: #666;
-    margin-bottom: 14px;
-  }
-  .section {
-    border: 3px solid var(--dark);
-    border-radius: 12px;
-    margin-bottom: 16px;
+
+  /* --- header bezel --- */
+  .bezel {
+    background: linear-gradient(160deg, var(--ink) 0%, var(--ink-soft) 100%);
+    padding: 16px 18px 20px;
+    position: relative;
     overflow: hidden;
   }
-  .section h2 {
-    margin: 0;
-    padding: 10px 14px;
-    font-size: 1.15rem;
+  .bezel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(180deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 3px);
+    pointer-events: none;
+  }
+  .status-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .status-dots { display: flex; gap: 6px; }
+  .status-dots span {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--red);
+  }
+  .status-dots span:nth-child(2) { background: var(--gold); }
+  .status-dots span:nth-child(3) { background: var(--teal); }
+  .dex-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+    color: #ffffffaa;
+    text-transform: uppercase;
+  }
+  .lens {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: 2px solid #ffffff40;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .lens::before {
+    content: "";
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 0 4px rgba(238,21,21,0.2);
+    animation: pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(238,21,21,0.20); }
+    50% { box-shadow: 0 0 0 8px rgba(238,21,21,0.08); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lens::before { animation: none; }
+  }
+
+  .trainer-line {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
     color: #fff;
   }
-  .section.cherche h2 { background: var(--rouge); }
-  .section.echange h2 { background: var(--vert); }
-  .list { padding: 8px; background: #fff; }
+  .trainer-line h1 {
+    font-size: 1.35rem;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+  .trainer-line .code {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  /* --- content --- */
+  .content { padding: 16px; }
+  .meta-line {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-align: right;
+    margin-bottom: 14px;
+  }
+
+  .panel {
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .panel-head {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .panel.cherche .panel-head { background: var(--red); }
+  .panel.echange .panel-head { background: var(--teal); }
+  .panel-head .marker { opacity: 0.75; }
+
   .row {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 6px;
-    border-bottom: 1px solid #eee;
-    font-size: 1rem;
+    padding: 10px 12px;
+    border-top: 1px solid var(--line);
+    font-size: 0.98rem;
   }
-  .row:last-child { border-bottom: none; }
+  .row:first-of-type { border-top: none; }
+  .row .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--line);
+    flex-shrink: 0;
+  }
   .row .name { flex: 1; font-weight: 600; }
   .tag {
-    font-size: 0.7rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
     font-weight: bold;
+    letter-spacing: 0.5px;
     color: #fff;
-    padding: 2px 7px;
-    border-radius: 6px;
+    padding: 3px 7px;
+    border-radius: 5px;
   }
-  .tag.shiny { background: #F4A200; }
-  .tag.lucky { background: #7C4DFF; }
-  .tag.pvp { background: #0288D1; }
-  .footer-note {
-    text-align: center;
+  .tag.shiny { background: var(--gold); color: var(--ink); }
+  .tag.lucky { background: var(--violet); }
+  .tag.pvp { background: var(--blue); }
+
+  .footer {
+    padding: 14px 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 2px dashed var(--line);
+  }
+  .footer .hint {
     font-size: 0.85rem;
-    color: #555;
-    margin: 10px 0 20px 0;
+    color: var(--muted);
   }
   #printBtn {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    background: var(--dark);
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 0.85rem;
+    background: var(--ink);
     color: #fff;
     border: none;
     border-radius: 10px;
-    font-size: 1rem;
-    font-weight: bold;
+    padding: 10px 16px;
     cursor: pointer;
-    margin-bottom: 20px;
   }
+  #printBtn:hover { background: var(--red-deep); }
+
   @media print {
-    body { background: #fff; }
+    body { background: #fff; padding: 0; }
+    .device { box-shadow: none; max-width: 100%; }
+    .bezel::after { display: none; }
     #printBtn { display: none; }
-    .wrap { max-width: 100%; }
+    .lens::before { animation: none; }
   }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="device">
 
-  <div class="header">
-    <h1>🔄 Échanges Pokémon GO</h1>
-    <div class="code">1234 5678 9012</div>
+  <div class="bezel">
+    <div class="status-row">
+      <div class="status-dots"><span></span><span></span><span></span></div>
+      <div class="dex-label">SCAN·DEX — TRADE MODE</div>
+      <div class="lens"></div>
+    </div>
+    <div class="trainer-line">
+      <h1 id="trainerName">PRÉNOM</h1>
+      <span class="code" id="trainerCode">1234 5678 9012</span>
+    </div>
   </div>
 
-  <div class="updated" id="updatedLine"></div>
+  <div class="content">
+    <div class="meta-line" id="updatedLine"></div>
 
-  <div class="section cherche">
-    <h2>😍 Je cherche</h2>
-    <div class="list" id="listCherche"></div>
+    <div class="panel cherche">
+      <div class="panel-head"><span class="marker">›</span> Recherche active</div>
+      <div id="listCherche"></div>
+    </div>
+
+    <div class="panel echange">
+      <div class="panel-head"><span class="marker">›</span> Disponible à l'échange</div>
+      <div id="listEchange"></div>
+    </div>
   </div>
 
-  <div class="section echange">
-    <h2>✅ J'échange</h2>
-    <div class="list" id="listEchange"></div>
+  <div class="footer">
+    <span class="hint">Viens me voir, on scanne 👀</span>
+    <button id="printBtn" onclick="window.print()">Imprimer</button>
   </div>
-
-  <button id="printBtn" onclick="window.print()">🖨️ Imprimer cette page</button>
-
-  <div class="footer-note">Viens me voir sur place, on échange 🙂</div>
 
 </div>
 
 <script>
 // ------------------------------------------------------------------
 // MODIFIE UNIQUEMENT CETTE PARTIE pour mettre à jour ta liste.
-// tag possibles : "shiny", "lucky", "pvp" (ou plusieurs, ou aucun)
+// tags possibles : "shiny", "lucky", "pvp" (plusieurs possibles, ou [])
 // ------------------------------------------------------------------
+const trainerName = "PRÉNOM";
+const trainerCode = "1234 5678 9012";
 const dateMaj = "29/07/2026";
 
 const jeCherche = [
@@ -159,21 +269,23 @@ const jEchange = [
 ];
 // ------------------------------------------------------------------
 
-const tagLabel = { shiny: "S", lucky: "L", pvp: "P" };
+const tagLabel = { shiny: "SHINY", lucky: "LUCKY", pvp: "PVP" };
 
 function renderList(target, items) {
-  const el = document.getElementById(target);
-  el.innerHTML = items.map(item => `
+  document.getElementById(target).innerHTML = items.map(item => `
     <div class="row">
+      <div class="dot"></div>
       <div class="name">${item.name}</div>
       ${item.tags.map(t => `<span class="tag ${t}">${tagLabel[t]}</span>`).join("")}
     </div>
   `).join("");
 }
 
+document.getElementById("trainerName").textContent = trainerName;
+document.getElementById("trainerCode").textContent = trainerCode;
+document.getElementById("updatedLine").textContent = "SYNC — " + dateMaj;
 renderList("listCherche", jeCherche);
 renderList("listEchange", jEchange);
-document.getElementById("updatedLine").textContent = "Mis à jour le " + dateMaj;
 </script>
 
 </body>
