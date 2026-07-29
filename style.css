@@ -110,7 +110,7 @@ body {
 .trainer-line .code {
   font-family: var(--mono);
   font-size: 0.82rem;
-  color: #fff;
+  color: white;
   letter-spacing: 1px;
 }
 .copy-btn {
