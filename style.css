@@ -84,7 +84,7 @@ body {
   border-radius: 50%;
   background: var(--red);
   box-shadow: 0 0 0 4px rgba(238,21,21,0.2);
-  animation: pulse 2.2s ease-in-out infinite;
+  animation: pulse 2.5s ease-in-out infinite;
 }
 @keyframes pulse {
   0%, 100% {
