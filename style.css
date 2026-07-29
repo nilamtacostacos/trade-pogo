@@ -251,6 +251,15 @@ body {
   background: var(--ink);
   color: #fff;
 }
+.reset-chip {
+  background: var(--panel);
+  color: var(--red);
+  border-color: var(--red);
+}
+.reset-chip:hover {
+  background: var(--red);
+  color: #fff;
+}
 .row.hidden { display: none; }
 
 @media print {
