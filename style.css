@@ -275,3 +275,42 @@ body {
 @media print {
   .filters { display: none; }
 }
+
+.pager {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -16px; /* compense le padding du .content pour aller bord à bord */
+}
+.pager::-webkit-scrollbar { display: none; }
+.pager { scrollbar-width: none; }
+
+.page {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  padding: 0 16px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px 0 14px;
+}
+.dot-ind {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--line);
+  padding: 0;
+  cursor: pointer;
+}
+.dot-ind.active { background: var(--ink); }
+
+@media print {
+  .pager { display: block; overflow: visible; margin: 0; }
+  .page { scroll-snap-align: none; padding: 0; }
+  .dots { display: none; }
+}
