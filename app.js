@@ -114,3 +114,13 @@ pager.addEventListener('scroll', () => {
   const index = Math.round(pager.scrollLeft / pager.clientWidth);
   dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
 });
+
+
+document.querySelectorAll('.filter-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const scope = btn.dataset.toggle;
+    const panelFilters = document.getElementById(`filters-${scope}`);
+    const isOpen = panelFilters.classList.toggle('open');
+    btn.textContent = isOpen ? '▴ Filtres' : '▾ Filtres';
+  });
+});
