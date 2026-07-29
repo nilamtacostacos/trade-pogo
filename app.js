@@ -25,6 +25,37 @@ function renderList(target, items) {
   }).join("");
 }
 
+function copyTrainerCode() {
+  const btn = document.getElementById("copyBtn");
+  const code = trainerCode.replace(/\s+/g, ""); // copie sans espaces, plus pratique à coller dans le jeu
+
+  function showCopied() {
+    btn.textContent = "✓";
+    btn.classList.add("copied");
+    setTimeout(() => {
+      btn.textContent = "⧉";
+      btn.classList.remove("copied");
+    }, 1500);
+  }
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(code).then(showCopied).catch(() => fallbackCopy(code, showCopied));
+  } else {
+    fallbackCopy(code, showCopied);
+  }
+}
+
+function fallbackCopy(text, onDone) {
+  const temp = document.createElement("textarea");
+  temp.value = text;
+  temp.style.position = "fixed";
+  temp.style.opacity = "0";
+  document.body.appendChild(temp);
+  temp.select();
+  try { document.execCommand("copy"); onDone(); } catch (e) { /* silencieux */ }
+  document.body.removeChild(temp);
+}
+
 document.getElementById("trainerName").textContent = trainerName;
 document.getElementById("trainerCode").textContent = trainerCode;
 document.getElementById("updatedLine").textContent = "SYNC — " + dateMaj;

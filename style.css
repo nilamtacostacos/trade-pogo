@@ -102,11 +102,32 @@ body {
   margin: 0;
   letter-spacing: 0.5px;
 }
+.trainer-line .code-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 .trainer-line .code {
   font-family: var(--mono);
   font-size: 0.82rem;
   color: var(--gold);
   letter-spacing: 1px;
+}
+.copy-btn {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  line-height: 1;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px;
+  padding: 4px 6px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: rgba(255,255,255,0.22); }
+.copy-btn.copied {
+  background: var(--teal);
+  border-color: var(--teal);
 }
 
 /* --- content --- */
@@ -202,5 +223,6 @@ body {
   .device { box-shadow: none; max-width: 100%; }
   .bezel::after { display: none; }
   #printBtn { display: none; }
+  .copy-btn { display: none; }
   .lens::before { animation: none; }
 }
