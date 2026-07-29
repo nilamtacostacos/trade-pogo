@@ -235,6 +235,10 @@ body {
   gap: 6px;
   margin-bottom: 14px;
 }
+.panel .filters {
+  padding: 10px 12px 4px;
+  margin-bottom: 0;
+}
 .filter-chip {
   font-family: var(--mono);
   font-size: 0.7rem;
