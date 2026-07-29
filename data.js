@@ -21,11 +21,11 @@ const dateMaj = "29/07/2026";
 // -----------------------------------------------------------
 
 const jeCherche = [
-  { name: "Pokémon 1", id: ""},    //, tags: ["shiny"]}//
-  { name: "Pokémon 2", id: ""},    //, tags: ["lucky"] //
-  { name: "Pokémon 3", id: ""},    //, tags: [] 
-  { name: "Pokémon 4", id: ""},    //tags: [] 
-  { name: "Pokémon 5", id: ""},    //, tags: ["pvp"] 
+  { name: "Pokémon 1", id: "", tags: [] },    //, tags: ["shiny"]}//
+  { name: "Pokémon 2", id: "", tags: [] },    //, tags: ["lucky"] //
+  { name: "Pokémon 3", id: "", tags: [] },    //, tags: [] 
+  { name: "Pokémon 4", id: "", tags: [] },    //tags: [] 
+  { name: "Pokémon 5", id: "", tags: [] },    //, tags: ["pvp"] 
 ];
 
 const jEchange = [
