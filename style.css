@@ -323,3 +323,29 @@ body {
   .page { scroll-snap-align: none; padding: 0; }
   .dots { display: none; }
 }
+
+.panel-head {
+  justify-content: space-between;
+}
+.filter-toggle {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 6px;
+  padding: 3px 8px;
+  cursor: pointer;
+}
+.filter-toggle:hover { background: rgba(255,255,255,0.28); }
+
+.filters {
+  display: none; /* masqués par défaut */
+}
+.filters.open {
+  display: flex;
+}
+
+@media print {
+  .filter-toggle { display: none; }
+}
