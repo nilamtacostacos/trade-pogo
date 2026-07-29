@@ -113,7 +113,7 @@ body {
 .trainer-line .code {
   font-family: var(--mono);
   font-size: 0.82rem;
-  color: white;
+  color: var(--gold);
   letter-spacing: 1px;
 }
 .copy-btn {
@@ -349,4 +349,34 @@ body {
 
 @media print {
   .filter-toggle { display: none; }
+}
+
+.lang-switch {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.lang-btn {
+  font-size: 1.1rem;
+  background: var(--panel);
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  padding: 4px 8px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+.lang-btn.active {
+  border-color: var(--ink);
+  opacity: 1;
+}
+
+.intro {
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  margin: 0 0 16px 0;
+}
+
+@media print {
+  .lang-switch { display: none; }
 }
