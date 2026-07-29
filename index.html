@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scan-Dex — Échanges Pokémon GO</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="device">
+
+  <div class="bezel">
+    <div class="status-row">
+      <div class="status-dots"><span></span><span></span><span></span></div>
+      <div class="dex-label">SCAN·DEX — TRADE MODE</div>
+      <div class="lens"></div>
+    </div>
+    <div class="trainer-line">
+      <h1 id="trainerName">PRÉNOM</h1>
+      <span class="code" id="trainerCode">1234 5678 9012</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="meta-line" id="updatedLine"></div>
+
+    <div class="panel cherche">
+      <div class="panel-head"><span class="marker">›</span> Recherche active</div>
+      <div id="listCherche"></div>
+    </div>
+
+    <div class="panel echange">
+      <div class="panel-head"><span class="marker">›</span> Disponible à l'échange</div>
+      <div id="listEchange"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="hint">Viens me voir, on scanne 👀</span>
+    <button id="printBtn" onclick="window.print()">Imprimer</button>
+  </div>
+
+</div>
+
+<!-- data.js = le seul fichier à modifier au quotidien -->
+<script src="data.js"></script>
+<!-- app.js = logique d'affichage, tu n'as jamais besoin d'y toucher -->
+<script src="app.js"></script>
+</body>
+</html>
