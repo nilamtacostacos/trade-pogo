@@ -107,34 +107,40 @@ function renderList(target, items) {
 
     // --- Ligne "carte" avec fond de lieu / fond spécial ---
     if (item.bg) {
+      const bgUrl = bgImgUrl(item.bg);
       const isShiny = item.tags.includes("shiny");
       const gifSrc = item.gif ? animatedUrl(item.gif, isShiny) : (item.id ? spriteUrl(item.id) : "");
       const monImg = gifSrc
-        ? `<img class="mon-gif" src="${gifSrc}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'">`
+        ? `<img class="mon-gif" src="${gifSrc}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
         : "";
       return `
-        <div class="row row-bg" data-tags="${item.tags.join(',')}" style="--row-bg:url('${bgImgUrl(item.bg)}')">
-          <div class="row-bg-overlay"></div>
-          ${monImg}
-          <div class="row-bg-info">
+        <div class="row row-bg" data-tags="${item.tags.join(',')}">
+          <img class="row-bg-blur" src="${bgUrl}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+          <div class="row-bg-left">
             <div class="name">${item.name}</div>
             <div class="tag-line">${tags}</div>
+          </div>
+          <div class="row-bg-center">
+            <img class="row-bg-sharp-img" src="${bgUrl}" alt="${item.name} background" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+          </div>
+          <div class="row-bg-right">
+            ${monImg}
           </div>
         </div>
       `;
     }
 
-    // --- Ligne classique (pas de fond) ---
+    // --- Ligne classique (pas de fond de lieu) ---
     const image = item.gif
-      ? `<img class="sprite" src="${animatedUrl(item.gif, item.tags.includes("shiny"))}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'">`
+      ? `<img class="sprite" src="${animatedUrl(item.gif, item.tags.includes("shiny"))}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
       : (item.id
-          ? `<img class="sprite" src="${spriteUrl(item.id)}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'">`
+          ? `<img class="sprite" src="${spriteUrl(item.id)}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
           : `<div class="dot"></div>`);
     return `
       <div class="row" data-tags="${item.tags.join(',')}">
-        ${image}
         <div class="name">${item.name}</div>
         ${tags}
+        ${image}
       </div>
     `;
   }).join("");
@@ -209,6 +215,7 @@ function apply() {
       const show = [...active].every(f => tags.includes(f));
       row.classList.toggle('hidden', active.size > 0 && !show);
     });
+    syncPagerHeight();
   }
 
   filterAppliers[scope] = apply;
@@ -221,6 +228,15 @@ setupFilters('echange', 'listEchange');
 const pager = document.getElementById('pager');
 const dots = document.querySelectorAll('.dot-ind');
 
+// Ajuste la hauteur du pager sur celle de la page actuellement visible,
+// pour que la page la plus courte n'hérite pas du vide de l'autre.
+function syncPagerHeight() {
+  const pages = document.querySelectorAll('.page');
+  const index = Math.round(pager.scrollLeft / pager.clientWidth);
+  const active = pages[index];
+  if (active) pager.style.height = active.scrollHeight + 'px';
+}
+
 dots.forEach(dot => {
   dot.addEventListener('click', () => {
     const index = Number(dot.dataset.page);
@@ -231,7 +247,10 @@ dots.forEach(dot => {
 pager.addEventListener('scroll', () => {
   const index = Math.round(pager.scrollLeft / pager.clientWidth);
   dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+  syncPagerHeight();
 });
+
+window.addEventListener('resize', syncPagerHeight);
 
 
 document.querySelectorAll('.filter-toggle').forEach(btn => {
@@ -240,6 +259,7 @@ document.querySelectorAll('.filter-toggle').forEach(btn => {
     const panelFilters = document.getElementById(`filters-${scope}`);
     const isOpen = panelFilters.classList.toggle('open');
     btn.querySelector('.arrow').textContent = isOpen ? '▴' : '▾';
+    syncPagerHeight();
   });
 });
 const introTrigger = document.getElementById('introTrigger');
@@ -269,10 +289,11 @@ function setLanguage(lang) {
 
   // on régénère les listes pour que les tags changent de langue aussi,
   // puis on réapplique les filtres actifs (sinon tout redevient visible)
-  renderList("listCherche", jeCherche);
-  renderList("listEchange", jEchange);
+renderList("listCherche", jeCherche);
+renderList("listEchange", jEchange);
   if (filterAppliers.cherche) filterAppliers.cherche();
   if (filterAppliers.echange) filterAppliers.echange();
+  syncPagerHeight();
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
