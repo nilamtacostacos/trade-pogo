@@ -84,12 +84,44 @@ function spriteUrl(id) {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 }
 
+// Fond de lieu / fond spécial — vignette Serebii (slug = nom du fichier sans .jpg)
+function bgImgUrl(slug) {
+  return `https://www.serebii.net/pokemongo/locationcard/th/${slug}.jpg`;
+}
+
+// Sprite animé (gif) — via Pokémon Showdown, slug = nom en minuscules sans espace/accent
+function animatedUrl(name) {
+  return `https://play.pokemonshowdown.com/sprites/ani/${name}.gif`;
+}
+
 function renderList(target, items) {
   document.getElementById(target).innerHTML = items.map(item => {
-    const image = item.id
-      ? `<img class="sprite" src="${spriteUrl(item.id)}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'">`
-      : `<div class="dot"></div>`;
     const tags = item.tags.map(t => `<span class="tag ${t}">${tagLabel[t]}</span>`).join("");
+
+    // --- Ligne "carte" avec fond de lieu / fond spécial ---
+    if (item.bg) {
+      const gifSrc = item.gif ? animatedUrl(item.gif) : (item.id ? spriteUrl(item.id) : "");
+      const monImg = gifSrc
+        ? `<img class="mon-gif" src="${gifSrc}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'">`
+        : "";
+      return `
+        <div class="row row-bg" data-tags="${item.tags.join(',')}" style="background-image:url('${bgImgUrl(item.bg)}')">
+          <div class="row-bg-overlay"></div>
+          ${monImg}
+          <div class="row-bg-info">
+            <div class="name">${item.name}</div>
+            <div class="tag-line">${tags}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // --- Ligne classique (pas de fond) ---
+    const image = item.gif
+      ? `<img class="sprite" src="${animatedUrl(item.gif)}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'">`
+      : (item.id
+          ? `<img class="sprite" src="${spriteUrl(item.id)}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'">`
+          : `<div class="dot"></div>`);
     return `
       <div class="row" data-tags="${item.tags.join(',')}">
         ${image}
