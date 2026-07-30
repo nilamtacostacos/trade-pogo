@@ -27,21 +27,26 @@
  <div class="content">
     <div class="meta-line" id="updatedLine"></div>
 
-<div class="lang-switch" id="langSwitch">
-  <button class="lang-btn active" data-lang="en">🇬🇧</button>
-  <button class="lang-btn" data-lang="pt">🇵🇹</button>
-  <button class="lang-btn" data-lang="fr">🇫🇷</button>
-  <button class="lang-btn" data-lang="es">🇪🇸</button>
-  <button class="lang-btn" data-lang="jp">🇯🇵</button>
-</div>
+<div class="top-row">
+  <div class="lang-switch" id="langSwitch">
+    <button class="lang-btn" data-lang="fr">🇫🇷</button>
+    <button class="lang-btn active" data-lang="en">🇬🇧</button>
+    <button class="lang-btn" data-lang="es">🇪🇸</button>
+    <button class="lang-btn" data-lang="pt">🇵🇹</button>
+    <button class="lang-btn" data-lang="jp">🇯🇵</button>
+  </div>
 
-<button class="intro-trigger" id="introTrigger" aria-label="Afficher le message">
-  <svg class="pokeball-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="12" cy="12" r="10" fill="#fff" stroke="var(--ink)" stroke-width="2"/>
-    <path d="M2 12a10 10 0 0 1 20 0z" fill="var(--red)" stroke="var(--ink)" stroke-width="2"/>
-    <line x1="2" y1="12" x2="22" y2="12" stroke="var(--ink)" stroke-width="2"/>
-    <circle cx="12" cy="12" r="3.2" fill="#fff" stroke="var(--ink)" stroke-width="2"/>
-  </svg>
+  <button class="intro-trigger" id="introTrigger" aria-label="Afficher le message">
+    <svg class="pokeball-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" fill="#fff" stroke="var(--ink)" stroke-width="2"/>
+      <path d="M2 12a10 10 0 0 1 20 0z" fill="var(--red)" stroke="var(--ink)" stroke-width="2"/>
+      <line x1="2" y1="12" x2="22" y2="12" stroke="var(--ink)" stroke-width="2"/>
+      <circle cx="12" cy="12" r="3.2" fill="#fff" stroke="var(--ink)" stroke-width="2"/>
+    </svg>
+    <span data-i18n="intro_label">Message</span>
+    <span class="notif-dot" id="notifDot"></span>
+  </button>
+</div>
   <span data-i18n="intro_label">Message</span>
   <span class="notif-dot" id="notifDot"></span>
 </button>
