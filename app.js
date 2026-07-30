@@ -240,7 +240,7 @@ function syncPagerHeight() {
   const pages = document.querySelectorAll('.page');
   const index = Math.round(pager.scrollLeft / pager.clientWidth);
   const active = pages[index];
-  if (active) pager.style.height = active.scrollHeight + 'px';
+  //if (active) pager.style.height = active.scrollHeight + 'px';
 }
 
 dots.forEach(dot => {

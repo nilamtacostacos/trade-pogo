@@ -388,10 +388,7 @@ body {
   color: #fff;
 }
 .row.hidden { display: none; }
-.row,
-.row img {
-    touch-action: auto;
-}
+
 /* --- ligne avec fond de lieu / fond spécial --- */
 /*.row.row-bg {
   position: relative;
@@ -577,10 +574,12 @@ body {
 .pager {
   display: flex;
   overflow-x: auto;
+  overflow-y: visible;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  margin: 0 -16px; /* compense le padding du .content pour aller bord à bord */
+  touch-action: pan-x pan-y;
+  margin: 0 -16px;
   align-items: flex-start;
   transition: height 0.25s ease;
 }
@@ -594,7 +593,13 @@ body {
   padding: 0 16px;
   box-sizing: border-box;
 }
-
+.pager,
+.page,
+.panel,
+#listCherche,
+#listEchange {
+    touch-action: auto;
+}
 .dots {
   display: flex;
   justify-content: center;
