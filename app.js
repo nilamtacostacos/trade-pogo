@@ -130,7 +130,7 @@ function renderList(target, items) {
       `;
     }
 
-    // --- Ligne classique (pas de fond de lieu) ---
+// --- Ligne classique (pas de fond de lieu) ---
     const image = item.gif
       ? `<img class="sprite" src="${animatedUrl(item.gif, item.tags.includes("shiny"))}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
       : (item.id
@@ -138,9 +138,15 @@ function renderList(target, items) {
           : `<div class="dot"></div>`);
     return `
       <div class="row" data-tags="${item.tags.join(',')}">
-        <div class="name">${item.name}</div>
-        ${tags}
-        ${image}
+        <div class="row-third row-name-col">
+          <div class="name">${item.name}</div>
+        </div>
+        <div class="row-third row-tags-col">
+          ${tags}
+        </div>
+        <div class="row-third row-sprite-col">
+          ${image}
+        </div>
       </div>
     `;
   }).join("");

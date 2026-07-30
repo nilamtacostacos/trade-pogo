@@ -257,6 +257,25 @@ body {
   font-size: 0.98rem;
 }
 .row:first-of-type { border-top: none; }
+.row-third {
+  flex: 1 1 33.333%;
+  max-width: 33.333%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.row-name-col {
+  justify-content: flex-start;
+}
+.row-tags-col {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.row-sprite-col {
+  justify-content: flex-end;
+}
 /*.row:not(.row-bg) {
   background-color: var(--panel);
   background-image: repeating-linear-gradient(135deg, rgba(20,20,28,0.035) 0px, rgba(20,20,28,0.035) 1px, transparent 1px, transparent 7px);
