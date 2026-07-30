@@ -37,7 +37,8 @@ const introText = {
 };
 
 const jeCherche = [
-  { name: "Mewtwo", id: 150, gif: "mewtwo", bg:"gofest2026copenhagen",tags: ["shiny", "location"] },    //, tags: ["shiny"]}//
+  { name: "Mewtwo - Go Fest 2026 Tokyo", id: 150, gif: "mewtwo", bg:"gofest2026tokyo",tags: ["shiny", "location"] },    //, tags: ["shiny"]}//
+  { name: "Mewtwo - Go Fest 2026 Chicago", id: 150, gif: "mewtwo", bg:"gofest2026chicago",tags: ["shiny", "location"] },    //, tags: ["shiny"]}//
   { name: "Pokémon 2", id: "", tags: ["shiny"] },    //, tags: ["lucky"] //
   { name: "Pokémon 3", id: "", tags: ["location"] },    //, tags: [] 
   { name: "Pokémon 4", id: "", tags: ["pvp"] },    //tags: [] 
