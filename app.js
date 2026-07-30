@@ -78,7 +78,8 @@ const translations = {
 //  Ce fichier gère juste l'affichage.
 // ============================================================
 
-const tagLabel = { shiny: "SHINY", lucky: "LUCKY", pvp: "PVP" };
+// const tagLabel = { shiny: "SHINY", lucky: "LUCKY", pvp: "PVP" };
+let currentLang = 'en'; // langue actuellement affichée, mise à jour par setLanguage()
 
 function spriteUrl(id) {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
@@ -97,7 +98,7 @@ function animatedUrl(name, shiny) {
 
 function renderList(target, items) {
   document.getElementById(target).innerHTML = items.map(item => {
-    const tags = item.tags.map(t => `<span class="tag ${t}">${tagLabel[t]}</span>`).join("");
+    const tags = item.tags.map(t => `<span class="tag ${t}">${translations[currentLang][`tag_${t}`] || t}</span>`).join("");
 
     // --- Ligne "carte" avec fond de lieu / fond spécial ---
     if (item.bg) {
@@ -171,6 +172,7 @@ document.getElementById("updatedLine").textContent = "SYNC — " + dateMaj;
 renderList("listCherche", jeCherche);
 renderList("listEchange", jEchange);
 
+const filterAppliers = {};
 function setupFilters(scope, listId) {
   const bar = document.querySelector(`.filters[data-scope="${scope}"]`);
   const list = document.getElementById(listId);
@@ -196,13 +198,15 @@ function setupFilters(scope, listId) {
     apply();
   });
 
-  function apply() {
+function apply() {
     list.querySelectorAll('.row').forEach(row => {
       const tags = (row.dataset.tags || '').split(',').filter(Boolean);
       const show = [...active].every(f => tags.includes(f));
       row.classList.toggle('hidden', active.size > 0 && !show);
     });
   }
+
+  filterAppliers[scope] = apply;
 }
 
 setupFilters('cherche', 'listCherche');
@@ -248,6 +252,7 @@ introTrigger.addEventListener('click', () => {
 });
 
 function setLanguage(lang) {
+  currentLang = lang;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
     if (translations[lang][key]) el.textContent = translations[lang][key];
@@ -256,6 +261,13 @@ function setLanguage(lang) {
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
+
+  // on régénère les listes pour que les tags changent de langue aussi,
+  // puis on réapplique les filtres actifs (sinon tout redevient visible)
+  renderList("listCherche", jeCherche);
+  renderList("listEchange", jEchange);
+  if (filterAppliers.cherche) filterAppliers.cherche();
+  if (filterAppliers.echange) filterAppliers.echange();
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
