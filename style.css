@@ -271,7 +271,7 @@ body {
   background: var(--line);
   flex-shrink: 0;
 }
-.row .name { flex: 1; font-weight: 600; }
+.row .name { flex: 1; min-width: 0; overflow-wrap: anywhere; font-weight: 600; }
 .tag {
   font-family: var(--mono);
   font-size: 0.65rem;
@@ -564,8 +564,10 @@ body {
 
 .page {
   flex: 0 0 100%;
+  min-width: 0;
   scroll-snap-align: start;
   padding: 0 16px;
+  box-sizing: border-box;
 }
 
 .dots {
