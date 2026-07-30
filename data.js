@@ -39,7 +39,7 @@ const introText = {
 const jeCherche = [
   { name: "Mewtwo - Go Fest 2026 Tokyo", id: 150, gif: "mewtwo", bg: "gofest2026tokyo", tags: ["shiny", "location"] },    //, tags: ["shiny"]}//
   { name: "Mewtwo - Go Fest 2026 Chicago", id: 150, gif: "mewtwo", bg: "gofest2026chicago", tags: ["shiny", "location"] },    //, tags: ["shiny"]}//
-};
+];
 
 const jEchange = [
 { name: "Mewtwo - Go Fest 2026 Copenhaguen", id: 150, gif: "mewtwo", bg: "gofest2026copenhaguen", tags: ["shiny", "location"] },
