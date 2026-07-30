@@ -58,6 +58,20 @@ const translations = {
     reset_filter: "Restablecer",
     footer_hint: "¡Vamos a intercambiar!",
   },
+  jp: {
+    intro_label: "メッセージ",
+    looking_for: "探しています",
+    to_trade: "提供します",
+    filters_btn: "フィルター",
+    tag_shiny: "色違い",
+    tag_location: "ロケーション背景",
+    tag_special: "特別背景",
+    tag_event: "イベント／コスプレ",
+    tag_region: "リージョンフォーム",
+    tag_pvp: "ピーブイピー",
+    reset_filter: "リセット",
+    footer_hint: "ぜひ交換しましょう",
+  },
 };
 
 // ============================================================
@@ -184,6 +198,19 @@ document.querySelectorAll('.filter-toggle').forEach(btn => {
     const isOpen = panelFilters.classList.toggle('open');
     btn.querySelector('.arrow').textContent = isOpen ? '▴' : '▾';
   });
+});
+const introTrigger = document.getElementById('introTrigger');
+const introCard = document.getElementById('introCard');
+const notifDot = document.getElementById('notifDot');
+
+introTrigger.addEventListener('click', () => {
+  const isHidden = introCard.hasAttribute('hidden');
+  if (isHidden) {
+    introCard.removeAttribute('hidden');
+    notifDot.classList.add('seen'); // le point disparaît une fois consulté
+  } else {
+    introCard.setAttribute('hidden', '');
+  }
 });
 
 function setLanguage(lang) {
