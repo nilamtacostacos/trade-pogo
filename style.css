@@ -361,16 +361,34 @@ body {
   position: relative;
   height: 96px;
   padding: 0;
-  background-size: cover;
-  background-position: center;
   background-color: var(--line); /* le temps que l'image charge */
   overflow: hidden;
   align-items: stretch;
+}
+.row.row-bg::before,
+.row.row-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--row-bg);
+  background-position: center;
+}
+.row.row-bg::before {
+  z-index: 0;
+  background-size: cover;
+  filter: blur(8px) brightness(0.75) saturate(1.1);
+  transform: scale(1.15); /* évite de voir les bords flous */
+}
+.row.row-bg::after {
+  z-index: 1;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .row-bg-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(20,20,28,0) 30%, rgba(20,20,28,0.8) 100%);
+  z-index: 2;
 }
 .mon-gif {
   position: absolute;
@@ -380,14 +398,14 @@ body {
   width: auto;
   image-rendering: pixelated;
   filter: drop-shadow(0 3px 5px rgba(0,0,0,0.55));
-  z-index: 1;
+  z-index: 3;
 }
 .row-bg-info {
   position: absolute;
   left: 12px;
   right: 88px;
   bottom: 8px;
-  z-index: 1;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   gap: 4px;
