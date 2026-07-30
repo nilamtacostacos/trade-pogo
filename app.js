@@ -90,8 +90,9 @@ function bgImgUrl(slug) {
 }
 
 // Sprite animé (gif) — via Pokémon Showdown, slug = nom en minuscules sans espace/accent
-function animatedUrl(name) {
-  return `https://play.pokemonshowdown.com/sprites/ani/${name}.gif`;
+function animatedUrl(name, shiny) {
+  const folder = shiny ? "ani-shiny" : "ani";
+  return `https://play.pokemonshowdown.com/sprites/${folder}/${name}.gif`;
 }
 
 function renderList(target, items) {
@@ -100,7 +101,8 @@ function renderList(target, items) {
 
     // --- Ligne "carte" avec fond de lieu / fond spécial ---
     if (item.bg) {
-      const gifSrc = item.gif ? animatedUrl(item.gif) : (item.id ? spriteUrl(item.id) : "");
+      const isShiny = item.tags.includes("shiny");
+      const gifSrc = item.gif ? animatedUrl(item.gif, isShiny) : (item.id ? spriteUrl(item.id) : "");
       const monImg = gifSrc
         ? `<img class="mon-gif" src="${gifSrc}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'">`
         : "";
@@ -118,7 +120,7 @@ function renderList(target, items) {
 
     // --- Ligne classique (pas de fond) ---
     const image = item.gif
-      ? `<img class="sprite" src="${animatedUrl(item.gif)}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'">`
+      ? `<img class="sprite" src="${animatedUrl(item.gif, item.tags.includes("shiny"))}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'">`
       : (item.id
           ? `<img class="sprite" src="${spriteUrl(item.id)}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'">`
           : `<div class="dot"></div>`);
