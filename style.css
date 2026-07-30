@@ -14,6 +14,7 @@
   --green: #6ED64F;
   --red: #CC2F2F;
   --marron: #94531F;
+  --grey: #BABABA;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --sans: -apple-system, "Segoe UI", system-ui, Arial, sans-serif;
 }
@@ -275,6 +276,7 @@ body {
 .tag.event { background: var(--violet); }
 .tag.pvp { background: var(--red); }
 .tag.region { background: var(--marron); }
+.tag.nonshiny { background: var(--grey); color: var(--ink)}
 
 .footer {
   padding: 14px 16px 20px;
