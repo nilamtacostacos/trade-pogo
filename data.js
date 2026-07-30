@@ -50,5 +50,11 @@ const jEchange = [
 { name: "Zacian - Go Fest 2025 Paris", id: 888, gif: "zacian", bg: "gofest2025paris", tags: ["location"] },
 { name: "Zamazenta - Go Fest 2025 Paris", id: 889, gif: "zamazenta", bg: "gofest2025paris", tags: ["location"] },
 { name: "Pikachu - Go Fest 2026 Copenhagen", id: 25, gif: "pikachu", bg: "legopokemon", tags: ["special"] },
-{ name: "Chenipan - Go Fest 2026 Copenhagen", id: 10, gif: "caterpie", bg: "" , tags: ["shiny", "event"] },
+{ name: "Caterpie - Go Fest 2026 Copenhagen", id: 10, gif: "caterpie", bg: "", tags: ["shiny", "event"] },
+{ name: "Caterpie - Go Fest 2026 Copenhagen", id: 10, gif: "caterpie", bg: "", tags: ["event"] },
+{ name:  "Falinks - Go Fest 2025 Paris", id: 870, gif: "falinks", bg: "", tags: ["event"] },
+{ name:  "Falinks - Go Fest 2025 Paris", id: 870, gif: "falinks", bg: "", tags: ["shiny", "event"] },
+{ name: "Kangaskhan", id: 115, gif: "kangaskhan", bg: "", tags: ["shiny", "region"] },
+{ name: "Tauros - Combat Breed", id: 128, gif: "tauros-paldeacombat", bg: "", tags: ["shiny", "region"] },
+{ name: "Pachirisu", id: 417, gif: "pachirisu", bg: "", tags: ["shiny", "region"] },
 ];
