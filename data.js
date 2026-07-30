@@ -37,17 +37,16 @@ const introText = {
 };
 
 const jeCherche = [
-  { name: "Mewtwo - Go Fest 2026 Tokyo", id: 150, gif: "mewtwo", bg:"gofest2026tokyo",tags: ["shiny", "location"] },    //, tags: ["shiny"]}//
-  { name: "Mewtwo - Go Fest 2026 Chicago", id: 150, gif: "mewtwo", bg:"gofest2026chicago",tags: ["shiny", "location"] },    //, tags: ["shiny"]}//
-  { name: "Pokémon 2", id: "", tags: ["shiny"] },    //, tags: ["lucky"] //
-  { name: "Pokémon 3", id: "", tags: ["location"] },    //, tags: [] 
-  { name: "Pokémon 4", id: "", tags: ["pvp"] },    //tags: [] 
-  { name: "Pokémon 5", id: "", tags: [] },    //, tags: ["pvp"] 
-];
+  { name: "Mewtwo - Go Fest 2026 Tokyo", id: 150, gif: "mewtwo", bg: "gofest2026tokyo", tags: ["shiny", "location"] },    //, tags: ["shiny"]}//
+  { name: "Mewtwo - Go Fest 2026 Chicago", id: 150, gif: "mewtwo", bg: "gofest2026chicago", tags: ["shiny", "location"] },    //, tags: ["shiny"]}//
+};
 
 const jEchange = [
-  { name: "Pokémon A", id: "", tags: ["shiny", "location"] },
-  { name: "Pokémon B", id: "", tags: ["region"] },
-  { name: "Pokémon C", id: "", tags: ["special","event"] },
-  { name: "Pokémon D", id: "", tags: [] },
+{ name: "Mewtwo - Go Fest 2026 Copenhaguen", id: 150, gif: "mewtwo", bg: "gofest2026copenhaguen", tags: ["shiny", "location"] },
+{ name: "Mewtwo - Go Fest 2026 Copenhaguen", id: 150, gif: "mewtwo", bg: "gofest2026copenhaguen", tags: ["location"] },
+{ name: "Sulfura - Go Fest 2026 Copenhaguen", id: 146, gif: "sulfura", bg: "gofest2026copenhaguen", tags: ["location"] },
+{ name: "Tauros - Go Fest 2026 Copenhaguen", id: 128, gif: "tauros-paldeacombat.gif", bg: "gofest2026copenhaguen", tags: ["location"] },
+{ name: "Kyogre - Go Fest 2026 Copenhaguen", id: 382, gif: "kyogre", bg: "gofest2026copenhaguen", tags: ["location"] },
+{ name: "Zacian- Go Fest 2025 Paris", id: 888, gif: "zacian", bg: "gofest2025paris", tags: ["location"] },
+{ name: "Zamazenta- Go Fest 2025 Paris", id: 889, gif: "zamazenta", bg: "gofest2025paris", tags: ["location"] },
 ];
