@@ -42,11 +42,13 @@ const jeCherche = [
 ];
 
 const jEchange = [
-{ name: "Mewtwo - Go Fest 2026 Copenhaguen", id: 150, gif: "mewtwo", bg: "gofest2026copenhagen", tags: ["shiny", "location"] },
-{ name: "Mewtwo - Go Fest 2026 Copenhaguen", id: 150, gif: "mewtwo", bg: "gofest2026copenhagen", tags: ["location"] },
-{ name: "Sulfura - Go Fest 2026 Copenhaguen", id: 146, gif: "sulfura", bg: "gofest2026copenhagen", tags: ["location"] },
-{ name: "Tauros - Go Fest 2026 Copenhaguen", id: 128, gif: "tauros-paldeacombat.gif", bg: "gofest2026copenhagen", tags: ["location"] },
+{ name: "Mewtwo - Go Fest 2026 Copenhagen", id: 150, gif: "mewtwo", bg: "gofest2026copenhagen", tags: ["shiny", "location"] },
+{ name: "Mewtwo - Go Fest 2026 Copenhagen", id: 150, gif: "mewtwo", bg: "gofest2026copenhagen", tags: ["location"] },
+{ name: "Moltres - Go Fest 2026 Copenhagen", id: 146, gif: "moltres", bg: "gofest2026copenhagen", tags: ["location"] },
+{ name: "Tauros - Go Fest 2026 Copenhagen", id: 128, gif: "tauros-paldeacombat", bg: "gofest2026copenhagen", tags: ["location"] },
 { name: "Kyogre - Go Fest 2026 Copenhaguen", id: 382, gif: "kyogre", bg: "gofest2026copenhagen", tags: ["location"] },
-{ name: "Zacian- Go Fest 2025 Paris", id: 888, gif: "zacian", bg: "gofest2025paris", tags: ["location"] },
-{ name: "Zamazenta- Go Fest 2025 Paris", id: 889, gif: "zamazenta", bg: "gofest2025paris", tags: ["location"] },
+{ name: "Zacian - Go Fest 2025 Paris", id: 888, gif: "zacian", bg: "gofest2025paris", tags: ["location"] },
+{ name: "Zamazenta - Go Fest 2025 Paris", id: 889, gif: "zamazenta", bg: "gofest2025paris", tags: ["location"] },
+{ name: "Pikachu - Go Fest 2026 Copenhagen", id: 25, gif: "pikachu", bg: "legopokemon", tags: ["special"] },
+{ name: "Chenipan - Go Fest 2026 Copenhagen", id: 10, gif: "caterpie", bg: , tags: ["shiny", "event"] },
 ];
