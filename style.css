@@ -388,6 +388,13 @@ body {
   color: #fff;
 }
 .row.hidden { display: none; }
+.row {
+  touch-action: pan-y;
+}
+.row img {
+  -webkit-user-drag: none;
+  touch-action: pan-y;
+}
 /* --- ligne avec fond de lieu / fond spécial --- */
 /*.row.row-bg {
   position: relative;
@@ -492,6 +499,8 @@ body {
   object-fit: cover;
   filter: blur(8px) brightness(0.75) saturate(1.1);
   transform: scale(1.15);
+  pointer-events: none;
+  -webkit-user-drag: none;
 }
 .row-bg-left,
 .row-bg-center,
