@@ -108,7 +108,7 @@ function renderList(target, items) {
         ? `<img class="mon-gif" src="${gifSrc}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'">`
         : "";
       return `
-        <div class="row row-bg" data-tags="${item.tags.join(',')}" style="background-image:url('${bgImgUrl(item.bg)}')">
+        <div class="row row-bg" data-tags="${item.tags.join(',')}" style="--row-bg:url('${bgImgUrl(item.bg)}')">
           <div class="row-bg-overlay"></div>
           ${monImg}
           <div class="row-bg-info">
