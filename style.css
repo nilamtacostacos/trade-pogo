@@ -388,12 +388,9 @@ body {
   color: #fff;
 }
 .row.hidden { display: none; }
-.row {
-  touch-action: pan-y;
-}
+.row,
 .row img {
-  -webkit-user-drag: none;
-  touch-action: pan-y;
+    touch-action: auto;
 }
 /* --- ligne avec fond de lieu / fond spécial --- */
 /*.row.row-bg {
