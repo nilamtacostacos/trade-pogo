@@ -220,11 +220,11 @@ const itemTexts = {
     jp: { name: "タイレーツ - Go Fest 2026 コペンハーゲン"},
   },
   kangaskhan: {
-    fr: { name: "Kangourex - Go Fest 2026 Copenhague"},
-    en: { name: "Kangaskhan - Go Fest 2026 Copenhagen"},
-    pt: { name: "Kangaskhan - Go Fest 2026 Copenhaga"},
-    es: { name: "Kangaskhan - Go Fest 2026 Copenhague"},
-    jp: { name: "ガルーラ - Go Fest 2026 コペンハーゲン"},
+    fr: { name: "Kangourex"},
+    en: { name: "Kangaskhan"},
+    pt: { name: "Kangaskhan"},
+    es: { name: "Kangaskhan"},
+    jp: { name: "ガルーラ"},
   },
   tauros_combat: {
     fr: { name: "Tauros Race Combative"},
