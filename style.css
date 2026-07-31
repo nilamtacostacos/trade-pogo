@@ -258,6 +258,8 @@ body {
 }
 .row:first-of-type { border-top: none; }
 .row-third {
+  position: relative;
+  z-index: 2;
   flex: 1 1 33.333%;
   max-width: 33.333%;
   min-width: 0;
@@ -276,14 +278,14 @@ body {
 .row-sprite-col {
   justify-content: flex-end;
 }
-/*.row:not(.row-bg) {
-  background-color: var(--panel);
-  background-image: repeating-linear-gradient(135deg, rgba(20,20,28,0.035) 0px, rgba(20,20,28,0.035) 1px, transparent 1px, transparent 7px);
-}*/
 .row .sprite {
-  width: 34px; height: 34px;
+  max-width: 100%;
+  max-height: 76px;
+  width: auto;
+  height: auto;
   flex-shrink: 0;
-  image-rendering: pixelated;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.35));
 }
 .row .dot {
   width: 8px; height: 8px; border-radius: 50%;
@@ -390,7 +392,7 @@ body {
   background: var(--red);
   color: #fff;
 }
-.row.hidden { display: none; }
+.row.hidden { display: none !important; }
 
 /* --- ligne avec fond de lieu / fond spécial --- */
 /*.row.row-bg {
@@ -467,15 +469,23 @@ body {
   object-fit: contain;
   filter: drop-shadow(0 3px 5px rgba(0,0,0,0.55));
 }*/
-/* --- lignes SANS fond de lieu : fond texturé par défaut --- */
+/* --- lignes SANS fond de lieu : bleu clair texturé + fondu de séparation --- */
 .row:not(.row-bg) {
   position: relative;
-  background-color: var(--panel);
-  background-image:
-    linear-gradient(rgba(255,255,255,0.87), rgba(255,255,255,0.87)),
-    url('https://www.serebii.net/pokemongo/locationcard/th/gofest2026global.jpg');
-  background-size: cover;
-  background-position: center;
+  min-height: 96px;
+  overflow: hidden;
+  background-color: #6B9AD6;
+  background-image: radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+.row:not(.row-bg)::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 26px;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* --- lignes AVEC fond de lieu / fond spécial : 3 tiers --- */
@@ -726,7 +736,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg);
+  min-height: 240px;
+  background-color: #6B9AD6;
+  background-image: radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px);
+  background-size: 10px 10px;
 }
 .modal-poster-blur {
   position: absolute;
@@ -762,10 +775,8 @@ body {
   transform: none;
   margin: 0 auto;
   display: block;
-  max-height: 170px;
-}
-.modal-poster-plain .modal-poster-mon {
-  max-height: 170px;
+  max-height: 210px;
+  max-width: 85%;
 }
 .modal-info {
   padding: 14px 16px 18px;

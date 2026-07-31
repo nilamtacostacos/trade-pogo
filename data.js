@@ -8,7 +8,7 @@ const trainerName = "NilamTacos";
 const trainerCode = "1898 4790 6821";
 
 // Date de dernière mise à jour (juste affichée, change-la à chaque event)
-const dateMaj = "29/07/2026";
+const dateMaj = "01/08/2026";
 
 // -----------------------------------------------------------
 // Pour chaque Pokémon :
@@ -38,6 +38,9 @@ const dateMaj = "29/07/2026";
 //              Chaque entrée : { label: "Nom affiché", url: "https://..." }
 //              (trouve l'image sur une fiche Pokédex Pokémon GO, ex. Serebii, clic droit →
 //              copier l'adresse de l'image). Laisse [] si tu n'en as pas besoin.
+//   spriteOffsetX → (optionnel) décalage horizontal en pixels du sprite animé si tu le
+//              trouves mal centré (ex: -10 pour décaler vers la gauche, 10 vers la droite).
+//              S'applique à la fois sur la ligne de la liste et dans la popup de détail.
 // -----------------------------------------------------------
 
 const introText = {
@@ -49,41 +52,41 @@ const introText = {
 };
 
 const jeCherche = [
-{ name: "Mewtwo - Go Fest 2026 Tokyo", id: 150, gif: "mewtwo", bg: "gofest2026tokyo", tags: ["shiny", "nonshiny", "location"] , notes: "J'ai 2 exemplaires shiny disponibles", variants: [{ label: "Armuré", gif: "mewtwo-armor", shiny: false }]},
-{ name: "Tauros - Go Fest 2026 Tokyo", id: 128, gif: "tauros-paldeaaqua", bg: "gofest2026tokyo", tags: ["shiny", "nonshiny", "location"] },
-{ name: "Articuno- Go Fest 2026 Tokyo", id: 144, gif: "articuno", bg: "gofest2026tokyo", tags: ["shiny", "nonshiny", "location"] },
-{ name: "Mewtwo - Go Fest 2026 Chicago", id: 150, gif: "mewtwo", bg: "gofest2026chicago", tags: ["shiny", "nonshiny", "location"] },
-{ name: "Tauros - Go Fest 2026 Chicago", id: 128, gif: "tauros-paldeablaze", bg: "gofest2026chicago", tags: ["shiny", "nonshiny", "location"] },
-{ name: "Zapdos - Go Fest 2026 Chicago", id: 145, gif: "zapdos", bg: "gofest2026chicago", tags: ["shiny", "nonshiny", "location"] },
-{ name: "Rayquaza - Go Fest London 2023", id: 384, gif: "rayquaza", bg: "gofestlondon", tags: ["shiny", "nonshiny", "location"] },
-{ name: "Rayquaza - Go Fest New York 2023", id: 384, gif: "rayquaza", bg: "gofestnewyorkcity", tags: ["shiny", "nonshiny", "location"] },
-{ name: "Rayquaza - Go Fest Osaka 2023", id: 384, gif: "rayquaza", bg: "gofestosaka", tags: ["shiny", "nonshiny", "location"] },
-{ name: "Pikachu - MLB Mariners", id: 25, gif: "pikachu", bg: "mlbmariners", tags: ["shiny", "nonshiny", "special"] },
-{ name: "Seviper", id: 336, gif: "seviper", bg: "", tags: ["shiny", "nonshiny", "region"] },
-{ name: "Relicanth", id: 369, gif: "relicanth", bg: "", tags: ["shiny", "nonshiny", "region"] },
-{ name: "Carnivine", id: 455, gif: "carnivine", bg: "", tags: ["shiny", "nonshiny", "region"] },
-{ name: "Durant", id: 632, gif: "durant", bg: "", tags: ["shiny", "region"] },
-{ name: "Sigilyph", id: 561, gif: "sigilyph", bg: "", tags: ["shiny", "region"] },
-{ name: "Maractus", id: 556, gif: "maractus", bg: "", tags: ["shiny", "region"] },
-{ name: "Throh", id: 538, gif: "throh", bg: "", tags: ["shiny", "region"] },
+{ name: "Mewtwo - Go Fest 2026 Tokyo", key: "mewtwo_tokyo", id: 150, gif: "mewtwo", bg: "gofest2026tokyo", tags: ["shiny", "nonshiny", "location"],spriteOffsetX: 15},
+{ name: "Tauros - Go Fest 2026 Tokyo", key: "tauros_tokyo",id: 128, gif: "tauros-paldeaaqua", bg: "gofest2026tokyo", tags: ["shiny", "nonshiny", "location"] },
+{ name: "Articuno- Go Fest 2026 Tokyo", key: "artikodin_tokyo", id: 144, gif: "articuno", bg: "gofest2026tokyo", tags: ["shiny", "nonshiny", "location"] },
+{ name: "Mewtwo - Go Fest 2026 Chicago", key: "mewtwo_chicago", id: 150, gif: "mewtwo", bg: "gofest2026chicago", tags: ["shiny", "nonshiny", "location"],spriteOffsetX: 15 },
+{ name: "Tauros - Go Fest 2026 Chicago", key: "tauros_chicago", id: 128, gif: "tauros-paldeablaze", bg: "gofest2026chicago", tags: ["shiny", "nonshiny", "location"] },
+{ name: "Zapdos - Go Fest 2026 Chicago", key: "zapdos", id: 145, gif: "zapdos", bg: "gofest2026chicago", tags: ["shiny", "nonshiny", "location"] },
+{ name: "Rayquaza - Go Fest London 2023", key: "rayquaza_london", id: 384, gif: "rayquaza", bg: "gofestlondon", tags: ["shiny", "nonshiny", "location"] },
+{ name: "Rayquaza - Go Fest New York 2023", key: "rayquaza_nyc", id: 384, gif: "rayquaza", bg: "gofestnewyorkcity", tags: ["shiny", "nonshiny", "location"] },
+{ name: "Rayquaza - Go Fest Osaka 2023", key: "rayquaza_osaka", id: 384, gif: "rayquaza", bg: "gofestosaka", tags: ["shiny", "nonshiny", "location"] },
+{ name: "Pikachu - MLB Mariners", key: "pikachu_mlb", id: 25, gif: "pikachu", bg: "mlbmariners", tags: ["shiny", "nonshiny", "special"] },
+{ name: "Seviper", key:"seviper", id: 336, gif: "seviper", bg: "", tags: ["shiny", "nonshiny", "region"],spriteOffsetX: -30 },
+{ name: "Relicanth", key:"relicanth", id: 369, gif: "relicanth", bg: "", tags: ["shiny", "nonshiny", "region"],spriteOffsetX: -25 },
+{ name: "Carnivine", key:"carnivine", id: 455, gif: "carnivine", bg: "", tags: ["shiny", "nonshiny", "region"],spriteOffsetX: -5 },
+{ name: "Durant", key:"durant", id: 632, gif: "durant", bg: "", tags: ["shiny", "region"],spriteOffsetX: -20 },
+{ name: "Sigilyph", key:"sigilyph", id: 561, gif: "sigilyph", bg: "", tags: ["shiny", "region"],spriteOffsetX: -5},
+{ name: "Maractus", key:"maractus", id: 556, gif: "maractus", bg: "", tags: ["shiny", "region"],spriteOffsetX: -15 },
+{ name: "Throh", key:"throh", id: 538, gif: "throh", bg: "", tags: ["shiny", "region"],spriteOffsetX: -5 },
 ];
 
 const jEchange = [
-{ name: "Mewtwo - Go Fest 2026 Copenhagen", id: 150, gif: "mewtwo", bg: "gofest2026copenhagen", tags: ["shiny", "location"] },
-{ name: "Mewtwo - Go Fest 2026 Copenhagen", id: 150, gif: "mewtwo", bg: "gofest2026copenhagen", tags: ["nonshiny", "location"] },
-{ name: "Moltres - Go Fest 2026 Copenhagen", id: 146, gif: "moltres", bg: "gofest2026copenhagen", tags: ["nonshiny", "location"] },
-{ name: "Tauros - Go Fest 2026 Copenhagen", id: 128, gif: "tauros-paldeacombat", bg: "gofest2026copenhagen", tags: ["nonshiny", "location"] },
-{ name: "Kyogre - Go Fest 2026 Copenhaguen", id: 382, gif: "kyogre", bg: "gofest2026copenhagen", tags: ["nonshiny", "location"] },
-{ name: "Zacian - Go Fest 2025 Paris", id: 888, gif: "zacian", bg: "gofest2025paris", tags: ["nonshiny", "location"] },
-{ name: "Zamazenta - Go Fest 2025 Paris", id: 889, gif: "zamazenta", bg: "gofest2025paris", tags: ["nonshiny", "location"] },
-{ name: "Pikachu - Go Fest 2026 Copenhagen", id: 25, gif: "pikachu", bg: "legopokemon", tags: ["nonshiny", "special"] },
-{ name: "Mewtwo - Global Go Fest", id: 150, gif: "mewtwo", bg: "megamewtwo", tags: ["shiny", "nonshiny", "special"] },
-{ name: "Caterpie - Go Fest 2026 Copenhagen", id: 10, gif: "caterpie", bg: "", tags: ["shiny", "nonshiny", "event"],notes: "Also available in non shiny form", images: [{label:"Cap", url:"https://www.serebii.net/pokemongo/pokemon/shiny/010-cap.png"}] },
-{ name:  "Falinks - Go Fest 2025 Paris", id: 870, gif: "falinks", bg: "", tags: ["shiny", "nonshiny", "event"],notes: "Also available in non shiny form", images: [{label:"Train Conductor", url:"https://www.serebii.net/pokemongo/pokemon/shiny/870-trainconductor.png"}]}, 
-{ name: "Kangaskhan", id: 115, gif: "kangaskhan", bg: "", tags: ["shiny", "nonshiny", "region"] },
-{ name: "Tauros - Combat Breed", id: 128, gif: "tauros-paldeacombat", bg: "", tags: ["shiny", "region"] },
-{ name: "Pachirisu", id: 417, gif: "pachirisu", bg: "", tags: ["shiny", "region"] },
-{ name: "Unown - Click to see the list", id: 201, gif: "unown-question", bg: "", tags: ["shiny"], notes: "", variants: [ { label: "Unown B", gif: "unown-b", shiny: true},{ label: "Unown G", gif: "unown-g", shiny: true},{ label: "Unown I", gif: "unown-i", shiny: true},{ label: "Unown K", gif: "unown-k", shiny: true},{ label: "Unown N", gif: "unown-n", shiny: true},{ label: "Unown O", gif: "unown-o", shiny: true},{ label: "Unown R", gif: "unown-r", shiny: true},{ label: "Unown Z", gif: "unown-z", shiny: true},{ label: "Unown ?", gif: "unown-question", shiny: true}] },
-{ name: "Event Pikachu - Click to see the list", id: 25, gif: "pikachu", bg: "", tags: ["shiny", "event"], notes: "All are available in shiny. Got more costumes but non shinies.", variants: [ ], images: [ {label: "Monocle Yellow", url: "https://www.serebii.net/pokemongo/pokemon/shiny/025-monocleyellow.png"}, {label: "Goggles blue", url: "https://www.serebii.net/pokemongo/pokemon/shiny/025-gogglesblue.png"}, {label: "Calem hat", url: "https://www.serebii.net/pokemongo/pokemon/shiny/025-calem.png"},{label: "Team Valor cap", url: "https://www.serebii.net/pokemongo/pokemon/shiny/025-valor.png"}]},
+{ name: "Mewtwo - Go Fest 2026 Copenhagen", key:"mewtwo_copenhagen", id: 150, gif: "mewtwo", bg: "gofest2026copenhagen", tags: ["shiny", "location"],spriteOffsetX: 15 },
+{ name: "Mewtwo - Go Fest 1526 Copenhagen", key:"mewtwo_copenhagen", id: 150, gif: "mewtwo", bg: "gofest2026copenhagen", tags: ["nonshiny", "location"],spriteOffsetX: 15 },
+{ name: "Moltres - Go Fest 2026 Copenhagen", key: "moltres", id: 146, gif: "moltres", bg: "gofest2026copenhagen", tags: ["nonshiny", "location"] },
+{ name: "Tauros - Go Fest 2026 Copenhagen", key: "tauros_copenhagen", id: 128, gif: "tauros-paldeacombat", bg: "gofest2026copenhagen", tags: ["nonshiny", "location"],spriteOffsetX: 20, },
+{ name: "Kyogre - Go Fest 2026 Copenhaguen", key: "kyogre", id: 382, gif: "kyogre", bg: "gofest2026copenhagen", tags: ["nonshiny", "location"] },
+{ name: "Zacian - Go Fest 2025 Paris", key: "zacian", id: 888, gif: "zacian", bg: "gofest2025paris", tags: ["nonshiny", "location"] },
+{ name: "Zamazenta - Go Fest 2025 Paris", key: "zamazenta", id: 889, gif: "zamazenta", bg: "gofest2025paris", tags: ["nonshiny", "location"] },
+{ name: "Pikachu - Go Fest 2026 Copenhagen", key: "pikachu_copenhagen", id: 25, gif: "pikachu", bg: "legopokemon", tags: ["nonshiny", "special"],spriteOffsetX: 10 },
+{ name: "Mewtwo - Global Go Fest", key: "mewtwo_global", id: 150, gif: "mewtwo", bg: "megamewtwo", tags: ["shiny", "nonshiny", "special"],spriteOffsetX: 15 },
+{ name: "Caterpie - Go Fest 2026 Copenhagen", key: "caterpie", id: 10, gif: "caterpie", bg: "", tags: ["shiny", "nonshiny", "event"],notes: "Also available in non shiny form", images: [{label:"Cap", url:"https://www.serebii.net/pokemongo/pokemon/shiny/010-cap.png"}],spriteOffsetX: -25 },
+{ name:  "Falinks - Go Fest 2025 Paris", key: "falinks", id: 870, gif: "falinks", bg: "", tags: ["shiny", "nonshiny", "event"],notes: "Also available in non shiny form", images: [{label:"Train Conductor", url:"https://www.serebii.net/pokemongo/pokemon/shiny/870-trainconductor.png"}],spriteOffsetX: -5}, 
+{ name: "Kangaskhan", key: "kangaskhan", id: 115, gif: "kangaskhan", bg: "", tags: ["shiny", "nonshiny", "region"] },
+{ name: "Tauros - Combat Breed", key: "tauros_combat", id: 128, gif: "tauros-paldeacombat", bg: "", tags: ["shiny", "region"],spriteOffsetX: 15 },
+{ name: "Pachirisu", key: "pachirisu", id: 417, gif: "pachirisu", bg: "", tags: ["shiny", "region"],spriteOffsetX: -5 },
+{ name: "Unown - Click to see the list", key: "zarbi", id: 201, gif: "unown-question", bg: "", tags: ["shiny"], notes: "", variants: [ { label: "Unown B", gif: "unown-b", shiny: true},{ label: "Unown G", gif: "unown-g", shiny: true},{ label: "Unown I", gif: "unown-i", shiny: true},{ label: "Unown K", gif: "unown-k", shiny: true},{ label: "Unown N", gif: "unown-n", shiny: true},{ label: "Unown O", gif: "unown-o", shiny: true},{ label: "Unown R", gif: "unown-r", shiny: true},{ label: "Unown Z", gif: "unown-z", shiny: true},{ label: "Unown ?", gif: "unown-question", shiny: true}],spriteOffsetX: -15 },
+{ name: "Event Pikachu - Click to see the list", key: "pikachu_event", id: 25, gif: "pikachu", bg: "", tags: ["shiny", "event"], notes: "All are available in shiny. Got more costumes but non shinies.", variants: [ ], images: [ {label: "Monocle Yellow", url: "https://www.serebii.net/pokemongo/pokemon/shiny/025-monocleyellow.png"}, {label: "Goggles blue", url: "https://www.serebii.net/pokemongo/pokemon/shiny/025-gogglesblue.png"}, {label: "Calem hat", url: "https://www.serebii.net/pokemongo/pokemon/shiny/025-calem.png"},{label: "Team Valor cap", url: "https://www.serebii.net/pokemongo/pokemon/shiny/025-valor.png"}],spriteOffsetX: -10},
 ]
 

@@ -1,88 +1,4 @@
-// ============================================================
-//  TRADUCTIONS
-// ============================================================
-const translations = {
-  fr: {
-    intro_label: "Message",
-    looking_for: "Je recherche",
-    to_trade: "J'offre",
-    filters_btn: "Filtres",
-    tag_shiny: "Shiny",
-    tag_nonshiny: "Standard",
-    tag_location: "Fond de lieu",
-    tag_special: "Fond spécial",
-    tag_event: "Event / costumé",
-    tag_region: "Régional",
-    tag_pvp: "PVP",
-    reset_filter: "Réinitialiser",
-    footer_hint: "Venez échanger !",
-    open_app: "Ouvrir Pokémon GO",
-  },
-  en: {
-    intro_label: "Message",
-    looking_for: "Looking for",
-    to_trade: "To trade",
-    filters_btn: "Filters",
-    tag_shiny: "Shiny",
-    tag_nonshiny: "Standard",
-    tag_location: "Location Background",
-    tag_special: "Special Background",
-    tag_event: "Event / costumed",
-    tag_region: "Region exclusive",
-    tag_pvp: "PVP",
-    reset_filter: "Reset filter",
-    footer_hint: "Let's trade !",
-    open_app: "Open Pokémon GO",
-  },
-  pt: {
-    intro_label: "Mensagem",
-    looking_for: "Estou à procura de",
-    to_trade: "Ofereço",
-    filters_btn: "Filtros",
-    tag_shiny: "Shiny",
-    tag_nonshiny: "Padrão",
-    tag_location: "Fundo do local",
-    tag_special: "Fundo especial",
-    tag_event: "Evento / Fantasias",
-    tag_region: "Exclusividade regional",
-    tag_pvp: "PVP",
-    reset_filter: "Reiniciar",
-    footer_hint: "Venham trocar!",
-    open_app: "Abrir Pokémon GO",
-  },
-  es: {
-    intro_label: "Mensaje",
-    looking_for: "Busco",
-    to_trade: "Intercambio",
-    filters_btn: "Filtros",
-    tag_shiny: "Shiny",
-    tag_nonshiny: "Estándar",
-    tag_location: "Fondo de lugar",
-    tag_special: "Fondo especial",
-    tag_event: "Evento / disfraz",
-    tag_region: "Exclusivo regional",
-    tag_pvp: "PVP",
-    reset_filter: "Restablecer",
-    footer_hint: "¡Vamos a intercambiar!",
-    open_app: "Abrir Pokémon GO",
-  },
-  jp: {
-    intro_label: "メッセージ",
-    looking_for: "探しています",
-    to_trade: "提供します",
-    filters_btn: "フィルター",
-    tag_shiny: "色違い",
-    tag_nonshiny: "標準",
-    tag_location: "ロケーション背景",
-    tag_special: "特別背景",
-    tag_event: "イベント／コスプレ",
-    tag_region: "リージョンフォーム",
-    tag_pvp: "ピーブイピー",
-    reset_filter: "リセット",
-    footer_hint: "ぜひ交換しましょう",
-    open_app: "Pokémon GOを開く",
-  },
-};
+
 
 // ============================================================
 //  Ce fichier gère juste l'affichage.
@@ -90,6 +6,15 @@ const translations = {
 
 // const tagLabel = { shiny: "SHINY", lucky: "LUCKY", pvp: "PVP" };
 let currentLang = 'en'; // langue actuellement affichée, mise à jour par setLanguage()
+
+// Renvoie le texte traduit d'un champ (ex: "name", "notes") si dispo dans
+// itemTexts via la clé "key" de l'item, sinon retombe sur le champ par défaut.
+function tField(item, field) {
+  if (item.key && itemTexts[item.key] && itemTexts[item.key][currentLang] && itemTexts[item.key][currentLang][field]) {
+    return itemTexts[item.key][currentLang][field];
+  }
+  return item[field] || "";
+}
 
 function spriteUrl(id) {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
@@ -109,24 +34,25 @@ function animatedUrl(name, shiny) {
 function renderList(target, items) {
   document.getElementById(target).innerHTML = items.map((item, idx) => {
     const tags = item.tags.map(t => `<span class="tag ${t}">${translations[currentLang][`tag_${t}`] || t}</span>`).join("");
+    const displayName = tField(item, 'name');
 
     // --- Ligne "carte" avec fond de lieu / fond spécial ---
     if (item.bg) {
       const bgUrl = bgImgUrl(item.bg);
       const isShiny = item.tags.includes("shiny");
       const gifSrc = item.gif ? animatedUrl(item.gif, isShiny) : (item.id ? spriteUrl(item.id) : "");
-      const monImg = gifSrc
-        ? `<img class="mon-gif" src="${gifSrc}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
+const monImg = gifSrc
+        ? `<img class="mon-gif" src="${gifSrc}" alt="${displayName}"${item.spriteOffsetX ? ` style="transform: translateX(${item.spriteOffsetX}px);"` : ""} loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
         : "";
       return `
         <div class="row row-bg" data-tags="${item.tags.join(',')}" data-list="${target}" data-idx="${idx}">
           <img class="row-bg-blur" src="${bgUrl}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">
           <div class="row-bg-left">
-            <div class="name">${item.name}</div>
+            <div class="name">${displayName}</div>
             <div class="tag-line">${tags}</div>
           </div>
           <div class="row-bg-center">
-            <img class="row-bg-sharp-img" src="${bgUrl}" alt="${item.name} background" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+            <img class="row-bg-sharp-img" src="${bgUrl}" alt="${displayName} background" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">
           </div>
           <div class="row-bg-right">
             ${monImg}
@@ -136,15 +62,17 @@ function renderList(target, items) {
     }
 
     // --- Ligne classique (pas de fond de lieu) ---
+// --- Ligne classique (pas de fond de lieu) ---
+    const spriteOffsetStyle = item.spriteOffsetX ? ` style="transform: translateX(${item.spriteOffsetX}px);"` : "";
     const image = item.gif
-      ? `<img class="sprite" src="${animatedUrl(item.gif, item.tags.includes("shiny"))}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
+      ? `<img class="sprite" src="${animatedUrl(item.gif, item.tags.includes("shiny"))}" alt="${displayName}"${spriteOffsetStyle} loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
       : (item.id
-          ? `<img class="sprite" src="${spriteUrl(item.id)}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
+          ? `<img class="sprite" src="${spriteUrl(item.id)}" alt="${displayName}"${spriteOffsetStyle} loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
           : `<div class="dot"></div>`);
     return `
       <div class="row" data-tags="${item.tags.join(',')}" data-list="${target}" data-idx="${idx}">
         <div class="row-third row-name-col">
-          <div class="name">${item.name}</div>
+          <div class="name">${displayName}</div>
         </div>
         <div class="row-third row-tags-col">
           ${tags}
@@ -156,6 +84,7 @@ function renderList(target, items) {
     `;
   }).join("");
 }
+
 
 function copyTrainerCode() {
   const btn = document.getElementById("copyBtn");
@@ -276,16 +205,18 @@ function openDetailModal(item) {
   const isShiny = item.tags.includes("shiny");
   const gifSrc = item.gif ? animatedUrl(item.gif, isShiny) : (item.id ? spriteUrl(item.id) : "");
   const tags = item.tags.map(t => `<span class="tag ${t}">${translations[currentLang][`tag_${t}`] || t}</span>`).join("");
+  const displayName = tField(item, 'name');
+  const displayNotes = tField(item, 'notes');
 
   const poster = item.bg
     ? `
       <div class="modal-poster">
         <img class="modal-poster-blur" src="${bgUrl}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">
-        <img class="modal-poster-bg" src="${bgUrl}" alt="${item.name} background" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">
-        ${gifSrc ? `<img class="modal-poster-mon" src="${gifSrc}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">` : ""}
+        <img class="modal-poster-bg" src="${bgUrl}" alt="${displayName} background" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+        ${gifSrc ? `<img class="modal-poster-mon" src="${gifSrc}" alt="${displayName}" ${item.spriteOffsetX ? `style="transform: translateX(calc(-50% + ${item.spriteOffsetX}px));"` : ""} loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">` : ""}
       </div>
     `
-    : (gifSrc ? `<div class="modal-poster modal-poster-plain"><img class="modal-poster-mon" src="${gifSrc}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></div>` : "");
+    : (gifSrc ? `<div class="modal-poster modal-poster-plain"><img class="modal-poster-mon" src="${gifSrc}" alt="${displayName}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></div>` : "");
 
   const variantsHtml = (item.variants && item.variants.length)
     ? `
@@ -300,7 +231,7 @@ function openDetailModal(item) {
     `
     : "";
 
-const notesHtml = item.notes ? `<p class="modal-notes">${item.notes}</p>` : "";
+  const notesHtml = displayNotes ? `<p class="modal-notes">${displayNotes}</p>` : "";
 
   const imagesHtml = (item.images && item.images.length)
     ? `
@@ -318,7 +249,7 @@ const notesHtml = item.notes ? `<p class="modal-notes">${item.notes}</p>` : "";
   modalBody.innerHTML = `
     ${poster}
     <div class="modal-info">
-      <div class="modal-name">${item.name}</div>
+      <div class="modal-name">${displayName}</div>
       <div class="tag-line">${tags}</div>
       ${notesHtml}
       ${variantsHtml}
@@ -360,7 +291,7 @@ function syncPagerHeight() {
   const pages = document.querySelectorAll('.page');
   const index = Math.round(pager.scrollLeft / pager.clientWidth);
   const active = pages[index];
-  //if (active) pager.style.height = active.scrollHeight + 'px';
+  if (active) pager.style.height = active.scrollHeight + 'px';
 }
 
 dots.forEach(dot => {
