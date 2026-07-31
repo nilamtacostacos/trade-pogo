@@ -16,6 +16,7 @@ const translations = {
     tag_pvp: "PVP",
     reset_filter: "Réinitialiser",
     footer_hint: "Venez échanger !",
+    open_app: "Ouvrir Pokémon GO",
   },
   en: {
     intro_label: "Message",
@@ -31,6 +32,7 @@ const translations = {
     tag_pvp: "PVP",
     reset_filter: "Reset filter",
     footer_hint: "Let's trade !",
+    open_app: "Open Pokémon GO",
   },
   pt: {
     intro_label: "Mensagem",
@@ -46,6 +48,7 @@ const translations = {
     tag_pvp: "PVP",
     reset_filter: "Reiniciar",
     footer_hint: "Venham trocar!",
+    open_app: "Abrir Pokémon GO",
   },
   es: {
     intro_label: "Mensaje",
@@ -61,6 +64,7 @@ const translations = {
     tag_pvp: "PVP",
     reset_filter: "Restablecer",
     footer_hint: "¡Vamos a intercambiar!",
+    open_app: "Abrir Pokémon GO",
   },
   jp: {
     intro_label: "メッセージ",
@@ -76,6 +80,7 @@ const translations = {
     tag_pvp: "ピーブイピー",
     reset_filter: "リセット",
     footer_hint: "ぜひ交換しましょう",
+    open_app: "Pokémon GOを開く",
   },
 };
 
@@ -102,7 +107,7 @@ function animatedUrl(name, shiny) {
 }
 
 function renderList(target, items) {
-  document.getElementById(target).innerHTML = items.map(item => {
+  document.getElementById(target).innerHTML = items.map((item, idx) => {
     const tags = item.tags.map(t => `<span class="tag ${t}">${translations[currentLang][`tag_${t}`] || t}</span>`).join("");
 
     // --- Ligne "carte" avec fond de lieu / fond spécial ---
@@ -114,7 +119,7 @@ function renderList(target, items) {
         ? `<img class="mon-gif" src="${gifSrc}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
         : "";
       return `
-        <div class="row row-bg" data-tags="${item.tags.join(',')}">
+        <div class="row row-bg" data-tags="${item.tags.join(',')}" data-list="${target}" data-idx="${idx}">
           <img class="row-bg-blur" src="${bgUrl}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">
           <div class="row-bg-left">
             <div class="name">${item.name}</div>
@@ -130,14 +135,14 @@ function renderList(target, items) {
       `;
     }
 
-// --- Ligne classique (pas de fond de lieu) ---
+    // --- Ligne classique (pas de fond de lieu) ---
     const image = item.gif
       ? `<img class="sprite" src="${animatedUrl(item.gif, item.tags.includes("shiny"))}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
       : (item.id
           ? `<img class="sprite" src="${spriteUrl(item.id)}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
           : `<div class="dot"></div>`);
     return `
-      <div class="row" data-tags="${item.tags.join(',')}">
+      <div class="row" data-tags="${item.tags.join(',')}" data-list="${target}" data-idx="${idx}">
         <div class="row-third row-name-col">
           <div class="name">${item.name}</div>
         </div>
@@ -181,6 +186,37 @@ function fallbackCopy(text, onDone) {
   temp.select();
   try { document.execCommand("copy"); onDone(); } catch (e) { /* silencieux */ }
   document.body.removeChild(temp);
+}
+
+function openPokemonGo() {
+  const now = Date.now();
+  const ua = navigator.userAgent || "";
+  const isIOS = /iPhone|iPad|iPod/.test(ua);
+  const isAndroid = /Android/.test(ua);
+
+  // Lien de fallback si l'app n'est pas installée
+  const storeUrl = isIOS
+    ? "https://apps.apple.com/app/pokemon-go/id1094591345"
+    : "https://play.google.com/store/apps/details?id=com.nianticlabs.pokemongo";
+
+  // Si après ~1.5s la page est toujours visible, on considère que l'app
+  // ne s'est pas ouverte et on redirige vers le store
+  const fallback = setTimeout(() => {
+    if (Date.now() - now < 2000) {
+      window.location.href = storeUrl;
+    }
+  }, 1500);
+
+  // Annule le fallback si l'utilisateur quitte la page (= l'app s'est ouverte)
+  window.addEventListener("visibilitychange", function onVis() {
+    if (document.hidden) {
+      clearTimeout(fallback);
+      window.removeEventListener("visibilitychange", onVis);
+    }
+  });
+
+  // Tentative d'ouverture de l'app via son scheme
+  window.location.href = "pokemongo://";
 }
 
 document.getElementById("trainerName").textContent = trainerName;
@@ -230,6 +266,90 @@ function apply() {
 setupFilters('cherche', 'listCherche');
 setupFilters('echange', 'listEchange');
 
+// --- Popup de détail au clic sur une ligne ---
+const modalOverlay = document.getElementById('modalOverlay');
+const modalBody = document.getElementById('modalBody');
+const modalClose = document.getElementById('modalClose');
+
+function openDetailModal(item) {
+  const bgUrl = item.bg ? bgImgUrl(item.bg) : "";
+  const isShiny = item.tags.includes("shiny");
+  const gifSrc = item.gif ? animatedUrl(item.gif, isShiny) : (item.id ? spriteUrl(item.id) : "");
+  const tags = item.tags.map(t => `<span class="tag ${t}">${translations[currentLang][`tag_${t}`] || t}</span>`).join("");
+
+  const poster = item.bg
+    ? `
+      <div class="modal-poster">
+        <img class="modal-poster-blur" src="${bgUrl}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+        <img class="modal-poster-bg" src="${bgUrl}" alt="${item.name} background" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+        ${gifSrc ? `<img class="modal-poster-mon" src="${gifSrc}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">` : ""}
+      </div>
+    `
+    : (gifSrc ? `<div class="modal-poster modal-poster-plain"><img class="modal-poster-mon" src="${gifSrc}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></div>` : "");
+
+  const variantsHtml = (item.variants && item.variants.length)
+    ? `
+      <div class="modal-variants">
+        ${item.variants.map(v => `
+          <div class="modal-variant">
+            <img src="${animatedUrl(v.gif, !!v.shiny)}" alt="${v.label}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+            <span>${v.label}</span>
+          </div>
+        `).join("")}
+      </div>
+    `
+    : "";
+
+const notesHtml = item.notes ? `<p class="modal-notes">${item.notes}</p>` : "";
+
+  const imagesHtml = (item.images && item.images.length)
+    ? `
+      <div class="modal-variants">
+        ${item.images.map(im => `
+          <div class="modal-variant">
+            <img src="${im.url}" alt="${im.label}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.style.display='none'">
+            <span>${im.label}</span>
+          </div>
+        `).join("")}
+      </div>
+    `
+    : "";
+
+  modalBody.innerHTML = `
+    ${poster}
+    <div class="modal-info">
+      <div class="modal-name">${item.name}</div>
+      <div class="tag-line">${tags}</div>
+      ${notesHtml}
+      ${variantsHtml}
+      ${imagesHtml}
+    </div>
+  `;
+  modalOverlay.removeAttribute('hidden');
+}
+
+function closeDetailModal() {
+  modalOverlay.setAttribute('hidden', '');
+  modalBody.innerHTML = "";
+}
+
+document.addEventListener('click', (e) => {
+  const row = e.target.closest('.row');
+  if (!row) return;
+  const listId = row.dataset.list;
+  const idx = Number(row.dataset.idx);
+  const source = listId === 'listCherche' ? jeCherche : jEchange;
+  const item = source[idx];
+  if (item) openDetailModal(item);
+});
+
+modalClose.addEventListener('click', closeDetailModal);
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) closeDetailModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeDetailModal();
+});
 
 const pager = document.getElementById('pager');
 const dots = document.querySelectorAll('.dot-ind');
