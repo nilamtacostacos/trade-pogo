@@ -1,5 +1,5 @@
 :root {
-  /-red: #EE1515;
+  --red: #EE1515;
   --red-deep: #A80F0F;
   --ink: #14141c;
   --ink-soft: #23232f;
@@ -587,7 +587,7 @@ body {
 .pager {
   display: flex;
   overflow-x: auto;
-  overflow-y: visible;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;

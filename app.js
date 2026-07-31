@@ -293,6 +293,10 @@ function syncPagerHeight() {
   const active = pages[index];
   if (active) pager.style.height = active.scrollHeight + 'px';
 }
+// Recalcule automatiquement la hauteur dès qu'une page change de taille
+// (ex: une image/gif qui finit de charger et agrandit le contenu)
+const pageResizeObserver = new ResizeObserver(() => syncPagerHeight());
+document.querySelectorAll('.page').forEach(page => pageResizeObserver.observe(page));
 
 dots.forEach(dot => {
   dot.addEventListener('click', () => {
