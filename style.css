@@ -377,7 +377,6 @@ body {
 .filter-chip[data-filter="region"]   { --chip-color: var(--marron); --chip-text: #ffffff; }
 .filter-chip[data-filter="pvp"]      { --chip-color: var(--red); --chip-text: #ffffff; }
 
-.filter-chip:not(.reset-chip):hover,
 .filter-chip:not(.reset-chip).active {
   background: var(--chip-color, var(--ink));
   color: var(--chip-text, #fff);
@@ -388,9 +387,16 @@ body {
   color: var(--red);
   border-color: var(--red);
 }
-.reset-chip:hover {
-  background: var(--red);
-  color: #fff;
+@media (hover: hover) {
+  .filter-chip:not(.reset-chip):hover {
+    background: var(--chip-color, var(--ink));
+    color: var(--chip-text, #fff);
+    border-color: var(--chip-color, var(--ink));
+  }
+  .reset-chip:hover {
+    background: var(--red);
+    color: #fff;
+  }
 }
 .row.hidden { display: none !important; }
 
